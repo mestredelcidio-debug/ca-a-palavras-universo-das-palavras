@@ -1,0 +1,6 @@
+{
+  "name": "Caça-Palavras Brasil",
+  "description": "Jogo clássico de caça-palavras brasileiro para celular com centenas de desafios, vocabulário autêntico e temas tropicais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
