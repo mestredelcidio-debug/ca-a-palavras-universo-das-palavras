@@ -3,15 +3,15 @@ import { Plus } from 'lucide-react';
 
 interface CoinPillProps {
   coins: number;
-  onOpenShop: () => void;
+  onOpenRewardBoxes: () => void;
 }
 
-export const CoinPill: React.FC<CoinPillProps> = ({ coins, onOpenShop }) => {
+export const CoinPill: React.FC<CoinPillProps> = ({ coins, onOpenRewardBoxes }) => {
   return (
     <button
-      onClick={onOpenShop}
-      className="relative flex items-center h-9 pr-1 pl-3 bg-gradient-to-r from-blue-700 to-blue-600 border border-blue-400/60 rounded-full shadow-md hover:brightness-105 active:scale-95 transition-all group"
-      title="Moedas (Abrir Loja)"
+      onClick={onOpenRewardBoxes}
+      className="relative flex items-center h-9 pr-1 pl-3 bg-gradient-to-r from-amber-700 to-amber-600 border border-amber-400/60 rounded-full shadow-md hover:brightness-105 active:scale-95 transition-all group"
+      title="Moedas (Abrir Recompensas)"
     >
       {/* 3D Shiny Gold Coin on the left */}
       <div className="absolute -left-3.5 w-8 h-8 rounded-full bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 border-2 border-yellow-200 shadow-md flex items-center justify-center transform group-hover:rotate-12 transition-transform">

@@ -19,7 +19,6 @@ interface HeaderProps {
   onToggleSound: () => void;
   onOpenSettings: () => void;
   onOpenChapters: () => void;
-  onOpenShop: () => void;
   onOpenDaily: () => void;
 }
 
@@ -35,8 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
   onGoHome,
   onToggleSound,
   onOpenSettings,
-  onOpenChapters,
-  onOpenShop
+  onOpenChapters
 }) => {
   const t = getTranslation(language);
 
@@ -69,16 +67,15 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Lado Direito: Moedas */}
+        {/* Lado Direito: Moedas (Apenas exibir) */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={onOpenShop}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/35 transition-all active:scale-95 shadow-sm"
+          <div
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/35 shadow-sm"
             title={t.coins}
           >
             <Coins className="w-4 h-4 text-amber-400" />
             <span className="text-xs font-black tabular-nums">{coins}</span>
-          </button>
+          </div>
         </div>
       </header>
     );
@@ -111,13 +108,12 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Moedas e Configurações */}
       <div className="flex items-center gap-1.5">
-        <button
-          onClick={onOpenShop}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold active:scale-95"
+        <div
+          className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold"
         >
           <Coins className="w-3.5 h-3.5" />
           <span className="tabular-nums font-black">{coins}</span>
-        </button>
+        </div>
 
         <button
           onClick={onToggleSound}

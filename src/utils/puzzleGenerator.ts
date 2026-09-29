@@ -56,26 +56,19 @@ function createSeededRandom(seed: number) {
   };
 }
 
-export function getDifficultyConfig(difficulty: Difficulty): {
+export function getDifficultyConfig(_difficulty?: Difficulty): {
   size: number;
   wordCount: number;
   directions: [number, number][];
 } {
-  switch (difficulty) {
-    case 'easy':
-      return { size: 9, wordCount: 5, directions: EASY_DIRECTIONS };
-    case 'medium':
-      return { size: 11, wordCount: 7, directions: MEDIUM_DIRECTIONS };
-    case 'hard':
-      return { size: 13, wordCount: 10, directions: ALL_DIRECTIONS };
-    case 'expert':
-      return { size: 15, wordCount: 13, directions: ALL_DIRECTIONS };
-  }
+  // Always fixed at 6 words per user specification
+  return { size: 9, wordCount: 6, directions: MEDIUM_DIRECTIONS };
 }
 
 /**
  * Attempts to place words on the grid.
  * Retries if placement density is too high or words fail.
+ * Always maintains exactly 6 words to be found.
  */
 export function generatePuzzle(
   categoryId: string,
@@ -102,7 +95,8 @@ export function generatePuzzle(
       return norm.length >= 3 && norm.length <= size;
     });
 
-    const targetWords = eligibleWords.slice(0, Math.min(config.wordCount, eligibleWords.length));
+    // Strictly exactly 6 words as requested by the user
+    const targetWords = eligibleWords.slice(0, 6);
     
     // Sort words by length descending for easier placement
     targetWords.sort((a, b) => normalizePtBr(b).length - normalizePtBr(a).length);

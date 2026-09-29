@@ -1,0 +1,146 @@
+{
+  "project": "Caca-Palavras Brasil",
+  "version": "5.2.0",
+  "macrostructure": {
+    "totalModes": 15,
+    "chaptersPerMode": 30,
+    "missionsPerChapter": 60,
+    "totalPossiblePuzzles": 27000
+  },
+  "selectedMode": {
+    "id": 1,
+    "slug": "modo_abismo",
+    "name": "Modo Abismo",
+    "subtitle": "Fuga contra o Tempo",
+    "coreMechanic": "O grid começa a subir de baixo para cima (ou a tela vai escurecendo). O jogador tem que encontrar palavras rapidamente para limpar as linhas de baixo antes que o tempo acabe ou o grid suma.",
+    "victoryCondition": "Encontrar todas as palavras antes que o abismo consuma a grade.",
+    "defeatCondition": "O grid sumir ou o tempo esgotar completamente.",
+    "psychologicalTrigger": "Efeito de afogamento e urgência motora aguda: quando falta apenas 1 palavra e a tela está 90% engolida pelo abismo.",
+    "painPoint": "Falta apenas uma palavra para salvar a fase antes que o abismo engula o tabuleiro.",
+    "consumable": {
+      "id": "extintor_abismo",
+      "name": "Extintor de Abismo (+15s)",
+      "description": "Pausa a subida por 15 segundos e recua o abismo em 2 linhas.",
+      "priceBRL": "R$ 2,90",
+      "coinsCost": 35
+    },
+    "chapters": [
+      {
+        "chapterId": 1,
+        "title": "Capítulo 1",
+        "subtitle": "Mata Atlântica",
+        "biome": "Floresta Tropical & Frutos Nativos",
+        "description": "Explore a flora e os frutos exóticos das florestas costeiras brasileiras contra o avanço das sombras.",
+        "chapterBountyRewardCoins": 500,
+        "tier": {
+          "gridRange": [8, 9],
+          "wordCountRange": [6, 8],
+          "allowDiagonals": false,
+          "allowReverse": false
+        },
+        "missions": [
+          {
+            "missionId": 1,
+            "title": "Raízes do Dossel",
+            "category": "frutas",
+            "gridSize": 8,
+            "wordCount": 6,
+            "allowDiagonals": false,
+            "allowReverse": false,
+            "timeLimitSeconds": 90,
+            "words": ["AÇAÍ", "CAJU", "MANGA", "GOIABA", "FIGO", "JACA"],
+            "rewards": {
+              "coins": 50,
+              "starsMax": 3,
+              "experience": 50
+            },
+            "specialRule": "Tutorial do Abismo: O nível da água sobe 1 linha a cada 20 segundos"
+          },
+          {
+            "missionId": 2,
+            "title": "Nascente Ameaçada",
+            "category": "frutas",
+            "gridSize": 8,
+            "wordCount": 6,
+            "allowDiagonals": false,
+            "allowReverse": false,
+            "timeLimitSeconds": 85,
+            "words": ["PITANGA", "ACEROLA", "ABACAXI", "BANANA", "MAMÃO", "UMBU"],
+            "rewards": {
+              "coins": 55,
+              "starsMax": 3,
+              "experience": 55
+            },
+            "specialRule": "Cada palavra encontrada recua o abismo em 1 linha"
+          },
+          {
+            "missionId": 3,
+            "title": "Sombras da Jabuticaba",
+            "category": "frutas",
+            "gridSize": 8,
+            "wordCount": 7,
+            "allowDiagonals": false,
+            "allowReverse": false,
+            "timeLimitSeconds": 80,
+            "words": ["JABUTICABA", "GRAVIOLA", "CUPUAÇU", "BURITI", "MURICI", "PEQUI", "CAJÁ"],
+            "rewards": {
+              "coins": 60,
+              "starsMax": 3,
+              "experience": 60
+            },
+            "specialRule": "Aceleração do Abismo nos últimos 30 segundos"
+          },
+          {
+            "missionId": 4,
+            "title": "Refúgio no Alto da Copa",
+            "category": "frutas",
+            "gridSize": 9,
+            "wordCount": 7,
+            "allowDiagonals": false,
+            "allowReverse": false,
+            "timeLimitSeconds": 75,
+            "words": ["MARACUJÁ", "CARAMBOLA", "JENIPAPO", "MANGABA", "SERIGUELA", "INGÁ", "CAMU CAMU"],
+            "rewards": {
+              "coins": 65,
+              "starsMax": 3,
+              "experience": 65
+            },
+            "specialRule": "Palavras na linha mais baixa valem o dobro de pontos de recuo"
+          },
+          {
+            "missionId": 5,
+            "title": "O Despertar da Névoa",
+            "category": "frutas",
+            "gridSize": 9,
+            "wordCount": 8,
+            "allowDiagonals": false,
+            "allowReverse": false,
+            "timeLimitSeconds": 70,
+            "words": ["GUARANÁ", "PITOMBA", "BACURI", "UVAIA", "ARAÇÁ", "SAPOTI", "TAMARINDO", "ABIU"],
+            "rewards": {
+              "coins": 75,
+              "starsMax": 3,
+              "experience": 75
+            },
+            "specialRule": "Alerta vermelho ativado quando restar 1 linha antes do transbordamento"
+          }
+        ]
+      },
+      {
+        "chapterId": 2,
+        "title": "Capítulo 2",
+        "subtitle": "Pantanal & Cerrado",
+        "biome": "Águas, Onças & Chapadas",
+        "description": "Enfrente as cheias rápidas e salve os termos da fauna pantaneira.",
+        "chapterBountyRewardCoins": 550,
+        "tier": {
+          "gridRange": [8, 9],
+          "wordCountRange": [6, 8],
+          "allowDiagonals": false,
+          "allowReverse": false
+        },
+        "missionsSummary": "60 missões procedurais geradas pelo Algoritmo Determinístico por ID"
+      }
+    ]
+  }
+}

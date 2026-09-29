@@ -8,6 +8,9 @@ export const DEFAULT_PROFILE: UserProfile = {
   stars: 0,
   currentLevel: 1,
   completedLevels: {},
+  chapterBackgrounds: {},
+  bgMode: 'nature',
+  activeNatureBg: 'floresta',
   lastDailyDate: '',
   dailyStreak: 0,
   completedDailyDates: [],
@@ -50,7 +53,14 @@ export function loadUserProfile(): UserProfile {
     const raw = localStorage.getItem(STORAGE_KEY_PROFILE);
     if (raw) {
       const parsed = JSON.parse(raw);
-      return { ...DEFAULT_PROFILE, ...parsed, stats: { ...DEFAULT_PROFILE.stats, ...(parsed.stats || {}) } };
+      return {
+        ...DEFAULT_PROFILE,
+        ...parsed,
+        chapterBackgrounds: parsed.chapterBackgrounds || {},
+        bgMode: parsed.bgMode || 'nature',
+        activeNatureBg: parsed.activeNatureBg || 'floresta',
+        stats: { ...DEFAULT_PROFILE.stats, ...(parsed.stats || {}) }
+      };
     }
   } catch (err) {
     console.error('Error loading user profile:', err);

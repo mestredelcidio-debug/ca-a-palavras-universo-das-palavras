@@ -1,17 +1,19 @@
 import React from 'react';
-import { ArrowLeft, Search, Wand2, Snowflake, Coins, Sparkles } from 'lucide-react';
+import { ArrowLeft, Search, Wand2, Snowflake, Coins, Sparkles, Gift, Play, ChevronRight } from 'lucide-react';
 import { CoinPill } from './CoinPill';
 
 interface ShopViewProps {
   coins: number;
   onGoBack: () => void;
   onClaimOffer: (amount: number) => void;
+  onOpenRewardBoxes?: () => void;
 }
 
 export const ShopView: React.FC<ShopViewProps> = ({
   coins,
   onGoBack,
-  onClaimOffer
+  onClaimOffer,
+  onOpenRewardBoxes
 }) => {
   return (
     <div className="min-h-screen w-full flex flex-col justify-start pb-12 overflow-y-auto bg-gradient-to-b from-[#181d52] via-[#101438] to-[#0a0d24] text-white">
@@ -24,11 +26,42 @@ export const ShopView: React.FC<ShopViewProps> = ({
           <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
         </button>
 
-        <CoinPill coins={coins} onOpenShop={() => {}} />
+        <CoinPill coins={coins} onOpenRewardBoxes={onOpenRewardBoxes || (() => {})} />
       </header>
 
       {/* Offers Container */}
       <main className="w-full max-w-md mx-auto px-4 space-y-4 pt-1">
+        {/* FREE REWARDS: 5 CAIXAS COM ANÚNCIOS (MOEDAS CRESCENTES) */}
+        {onOpenRewardBoxes && (
+          <div
+            onClick={onOpenRewardBoxes}
+            className="w-full rounded-3xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 p-4 text-slate-950 shadow-2xl border-2 border-amber-300 flex items-center justify-between gap-3 cursor-pointer hover:scale-[1.01] active:scale-98 transition-all group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-slate-950 text-amber-300 flex items-center justify-center text-2xl shadow-lg border border-amber-300/40">
+                🎁
+              </div>
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="px-2 py-0.5 rounded-full bg-slate-950 text-amber-300 text-[10px] font-black uppercase tracking-wider">
+                    GRÁTIS
+                  </span>
+                  <span className="text-[11px] font-bold text-white drop-shadow">
+                    5 Caixas de Recompensa
+                  </span>
+                </div>
+                <h4 className="font-display font-black text-sm text-slate-950 leading-tight">
+                  Assista a vídeos & Ganhe até +1.300🪙
+                </h4>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-950 text-amber-300 font-display font-black text-xs shadow-md shrink-0">
+              <Play className="w-3.5 h-3.5 fill-amber-300" />
+              <span>ABRIR</span>
+            </div>
+          </div>
+        )}
         {/* OFFER 1: OFERTA INCRÍVEL! x10 */}
         <div className="w-full rounded-3xl bg-[#fdf5f5] text-slate-800 shadow-2xl overflow-hidden border-2 border-white/80 relative">
           {/* Golden Ribbon on top right */}
@@ -180,6 +213,94 @@ export const ShopView: React.FC<ShopViewProps> = ({
             >
               BRL 65,99
             </button>
+          </div>
+        </div>
+
+        {/* SEÇÃO DE FACILIDADES & ITENS INDIVIDUAIS (R$ 2,50 a R$ 4,90) */}
+        <div className="pt-2">
+          <div className="flex items-center justify-between px-1 mb-2">
+            <span className="font-display font-black text-xs uppercase tracking-wider text-amber-300">
+              ⚡ ITENS DE JOGO & FACILIDADES (R$ 2,50 A R$ 4,90)
+            </span>
+            <span className="text-[10px] text-white/60">Uso na hora do jogo</span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            {/* Item 1: Varinha Mágica */}
+            <div className="p-3 rounded-2xl bg-gradient-to-b from-purple-950/80 to-slate-900 border border-purple-500/40 flex flex-col justify-between shadow-lg">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-8 h-8 rounded-xl bg-purple-500 text-white flex items-center justify-center shadow-md shrink-0">
+                  <Wand2 className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-black text-xs text-white leading-tight">Varinha Mágica</h4>
+                  <span className="text-[9px] text-purple-200">Acha 1 palavra na hora</span>
+                </div>
+              </div>
+              <button
+                onClick={() => onClaimOffer(200)}
+                className="w-full py-1.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-display font-black text-xs shadow-md active:scale-95 transition-all cursor-pointer text-center"
+              >
+                R$ 4,90
+              </button>
+            </div>
+
+            {/* Item 2: Radar de Letras */}
+            <div className="p-3 rounded-2xl bg-gradient-to-b from-amber-950/80 to-slate-900 border border-amber-500/40 flex flex-col justify-between shadow-lg">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center shadow-md shrink-0">
+                  <Search className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-black text-xs text-white leading-tight">Super Radar</h4>
+                  <span className="text-[9px] text-amber-200">Revela a 1ª letra</span>
+                </div>
+              </div>
+              <button
+                onClick={() => onClaimOffer(100)}
+                className="w-full py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-display font-black text-xs shadow-md active:scale-95 transition-all cursor-pointer text-center"
+              >
+                R$ 2,50
+              </button>
+            </div>
+
+            {/* Item 3: Congelador / Pausa */}
+            <div className="p-3 rounded-2xl bg-gradient-to-b from-sky-950/80 to-slate-900 border border-sky-500/40 flex flex-col justify-between shadow-lg">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-8 h-8 rounded-xl bg-sky-500 text-white flex items-center justify-center shadow-md shrink-0">
+                  <Snowflake className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-black text-xs text-white leading-tight">+30s de Tempo</h4>
+                  <span className="text-[9px] text-sky-200">Pausa & tempo extra</span>
+                </div>
+              </div>
+              <button
+                onClick={() => onClaimOffer(120)}
+                className="w-full py-1.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-display font-black text-xs shadow-md active:scale-95 transition-all cursor-pointer text-center"
+              >
+                R$ 2,90
+              </button>
+            </div>
+
+            {/* Item 4: Lâmpada Raio-X */}
+            <div className="p-3 rounded-2xl bg-gradient-to-b from-orange-950/80 to-slate-900 border border-orange-500/40 flex flex-col justify-between shadow-lg">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center shadow-md shrink-0">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-black text-xs text-white leading-tight">Visão Raio-X</h4>
+                  <span className="text-[9px] text-orange-200">Ilumina todas iniciais</span>
+                </div>
+              </div>
+              <button
+                onClick={() => onClaimOffer(150)}
+                className="w-full py-1.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-display font-black text-xs shadow-md active:scale-95 transition-all cursor-pointer text-center"
+              >
+                R$ 3,50
+              </button>
+            </div>
           </div>
         </div>
 

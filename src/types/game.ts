@@ -51,6 +51,9 @@ export interface UserProfile {
   stars: number;
   currentLevel: number;
   completedLevels: Record<number, { stars: number; time: number }>;
+  chapterBackgrounds: Record<number, string>; // Maps chapter ID to gradient string
+  bgMode?: 'classic' | 'nature' | 'chapter'; // Choice of background mode
+  activeNatureBg?: string; // ID of chosen nature background (forest, sea, river, waterfall)
   lastDailyDate: string;
   dailyStreak: number;
   completedDailyDates: string[]; // YYYY-MM-DD

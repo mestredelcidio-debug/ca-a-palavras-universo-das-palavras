@@ -8,99 +8,111 @@ export interface CategoryData {
 
 export const CATEGORIES: CategoryData[] = [
   {
-    id: 'animais',
-    title: 'Animais',
-    description: 'Fauna exuberante do Brasil e do mundo',
-    iconName: 'PawPrint',
-    words: [
-      'ONÇA PINTADA', 'CAPIVARA', 'ARARA', 'MICO LEÃO', 'TAMANDUÁ',
-      'TATU', 'TUCANO', 'BOTO COR DE ROSA', 'PREGUIÇA', 'JACARÉ',
-      'JIBOIA', 'LOBO GUARÁ', 'QUATI', 'ANTA', 'JAGUATIRICA',
-      'SUÇUARANA', 'CUTIA', 'SAGUI', 'PAPAGAIO', 'CORUJA',
-      'GOLFINHO', 'BALEIA', 'TARTARUGA', 'GAVIÃO', 'GARÇA'
-    ]
-  },
-  {
     id: 'frutas',
-    title: 'Frutas',
-    description: 'Sabores tropicais e frutas nativas',
+    title: 'Frutas Tropicais',
+    description: 'Sabores tropicais e frutas nativas do Brasil',
     iconName: 'Apple',
     words: [
       'AÇAÍ', 'CUPUAÇU', 'JABUTICABA', 'GRAVIOLA', 'CAJU',
       'PITANGA', 'MARACUJÁ', 'GOIABA', 'MANGA', 'ABACAXI',
       'PITOMBA', 'CAJÁ', 'ACEROLA', 'BACURI', 'GUARANÁ',
       'BURITI', 'CAMU CAMU', 'MURICI', 'PEQUI', 'UMBU',
-      'BANANA', 'MELANCIA', 'MAMÃO', 'CARAMBOLA', 'FIGO'
+      'BANANA', 'MELANCIA', 'MAMÃO', 'CARAMBOLA', 'FIGO',
+      'JENIPAPO', 'MANGABA', 'SERIGUELA', 'BIRIBÁ', 'CAMBUCI',
+      'BACUPARI', 'UVAIA', 'ABIU', 'ARAÇÁ', 'SAPOTI',
+      'JACA', 'TAMARINDO', 'INGÁ', 'GUABIROBA', 'JERICÓ'
     ]
   },
   {
-    id: 'comidas_brasileiras',
-    title: 'Comidas Brasileiras',
-    description: 'Pratos típicos e doces tradicionais',
-    iconName: 'Utensils',
+    id: 'animais',
+    title: 'Fauna Brasileira',
+    description: 'Animais emblemáticos dos nossos biomas',
+    iconName: 'PawPrint',
     words: [
-      'FEIJOADA', 'MOQUECA', 'PÃO DE QUEIJO', 'COXINHA', 'PASTEL',
-      'BRIGADEIRO', 'TAPIOCA', 'FAROFA', 'ACARAJÉ', 'BAIÃO DE DOIS',
-      'VATAPÁ', 'PAMONHA', 'QUINDIM', 'CANJICA', 'BOBÓ DE CAMARÃO',
-      'VIRADO A PAULISTA', 'TUCUPI', 'CARURU', 'BEIJINHO', 'COCADA',
-      'ESCONDIDINHO', 'PÉ DE MOLEQUE', 'CURAU', 'PATO NO TUCUPI', 'PAÇOCA'
+      'ONÇA PINTADA', 'CAPIVARA', 'ARARA AZUL', 'MICO LEÃO', 'TAMANDUÁ',
+      'TATU BOLA', 'TUCANO', 'BOTO ROSA', 'PREGUIÇA', 'JACARÉ',
+      'JIBOIA', 'LOBO GUARÁ', 'QUATI', 'ANTA', 'JAGUATIRICA',
+      'SUÇUARANA', 'CUTIA', 'SAGUI', 'PAPAGAIO', 'CORUJA',
+      'GOLFINHO', 'BALEIA', 'TARTARUGA', 'GAVIÃO', 'GARÇA',
+      'HARPIA', 'IRARA', 'CERVO', 'TEIÚ', 'MUTUM',
+      'PREÁ', 'SERIEMA', 'JABUTI', 'SUCURI', 'COLIBRI',
+      'GUAXINIM', 'VEADO', 'URUTAU', 'PACA', 'ARIRANHA'
     ]
   },
   {
-    id: 'estados_brasileiros',
-    title: 'Estados Brasileiros',
-    description: 'As 27 unidades federativas do Brasil',
-    iconName: 'Map',
+    id: 'natureza',
+    title: 'Amazônia & Biomas',
+    description: 'Florestas, rios majestosos e paisagens naturais',
+    iconName: 'Trees',
     words: [
-      'BAHIA', 'CEARÁ', 'GOIÁS', 'MINAS GERAIS', 'PARANÁ',
-      'AMAZONAS', 'SÃO PAULO', 'PERNAMBUCO', 'SANTA CATARINA', 'RIO DE JANEIRO',
-      'PARÁ', 'MARANHÃO', 'PARAÍBA', 'ALAGOAS', 'SERGIPE',
-      'ACRE', 'RONDÔNIA', 'RORAIMA', 'AMAPÁ', 'TOCANTINS',
-      'MATO GROSSO', 'ESPÍRITO SANTO', 'PIAUÍ', 'RIO GRANDE DO SUL', 'RIO GRANDE DO NORTE'
+      'FLORESTA', 'PANTANAL', 'CACHOEIRA', 'RIO AMAZONAS', 'PLANALTO',
+      'VAGALUME', 'CERRADO', 'MATA ATLÂNTICA', 'MANGUEZAL', 'VEREDA',
+      'CAATINGA', 'GRUTA', 'CHAPADA', 'IGUAPÓ', 'SERRA DO MAR',
+      'IGARAPÉ', 'ARARIPE', 'RESTINGA', 'VITÓRIA RÉGIA', 'ORQUÍDEA',
+      'PAMPA', 'ENCONTRO DAS ÁGUAS', 'SERRA DA CANASTRA', 'CANUDOS', 'JALAPÃO',
+      'LENÇÓIS', 'BONITO', 'CORREDEIRA', 'NASCENTE', 'BROMÉLIA',
+      'IPÊ AMARELO', 'SERRANIA', 'PINHEIRO', 'ARAU CÁRIA', 'ABISMO'
     ]
   },
   {
-    id: 'capitais',
-    title: 'Capitais',
-    description: 'Capitais brasileiras de norte a sul',
-    iconName: 'Building2',
+    id: 'praia',
+    title: 'Litoral & Praias',
+    description: 'Areia dourada, mar azul e brisa costeira',
+    iconName: 'Sun',
     words: [
-      'BRASÍLIA', 'SALVADOR', 'FORTALEZA', 'CURITIBA', 'RECIFE',
-      'MANAUS', 'BELÉM', 'GOIÂNIA', 'PORTO ALEGRE', 'FLORIANÓPOLIS',
-      'NATAL', 'VITÓRIA', 'CUIABÁ', 'TERESINA', 'MACEIÓ',
-      'ARACAJU', 'JOÃO PESSOA', 'SÃO LUÍS', 'CAMPO GRANDE', 'BELO HORIZONTE',
-      'MACAPÁ', 'BOA VISTA', 'PORTO VELHO', 'PALMAS', 'RIO BRANCO'
+      'AREIA', 'ONDA', 'MAR', 'CONCHA', 'GUARDA SOL',
+      'CANGA', 'ÁGUA DE COCO', 'PRANCHA', 'CALÇADÃO', 'MARESIA',
+      'SALVA VIDAS', 'BRISA', 'CASTELO', 'DUNA', 'FAROL',
+      'PROTETOR', 'ÓCULOS', 'SURFISTA', 'QUIOSQUE', 'MERGULHO',
+      'CHINELO', 'PÔR DO SOL', 'CORAIS', 'MARÉ ALTA', 'BANHO DE MAR',
+      'COQUEIRO', 'ARPOADOR', 'COPACABANA', 'IPANEMA', 'PORTO DE GALINHAS',
+      'NORONHA', 'ILHABELA', 'PIPA', 'JERI', 'TRANCOSO'
+    ]
+  },
+  {
+    id: 'cultura_brasileira',
+    title: 'Sertão & Raízes',
+    description: 'Folclore, forró, cordel e calor do nordeste',
+    iconName: 'Flame',
+    words: [
+      'CORDEL', 'CAPOEIRA', 'BOI BUMBÁ', 'FESTA JUNINA', 'CIRANDA',
+      'MACULELÊ', 'VIOLA', 'SACI', 'CURUPIRA', 'IARA',
+      'ARTESANATO', 'REPENTE', 'CARRANCA', 'LITERATURA', 'BERIMBAU',
+      'PARINTINS', 'BONECOS', 'FANDANGO', 'CATIRA', 'FORRÓ',
+      'SANFONA', 'ZABUMBA', 'TRIÂNGULO', 'XAXADO', 'BAIÃO',
+      'LUA CHEIA', 'GIBÃO', 'CANGAÇO', 'LAMPIÃO', 'BONITO'
     ]
   },
   {
     id: 'cidades',
-    title: 'Cidades Encantadoras',
-    description: 'Cidades históricas e turísticas do Brasil',
+    title: 'Cidades Históricas',
+    description: 'Patrimônio colonial, ladeiras e arquitetura secular',
     iconName: 'Landmark',
     words: [
       'OURO PRETO', 'PARATY', 'GRAMADO', 'PETRÓPOLIS', 'OLINDA',
       'CAMPINAS', 'SANTOS', 'NITERÓI', 'LONDRINA', 'MARINGÁ',
       'BÚZIOS', 'ILHÉUS', 'FOZ DO IGUAÇU', 'TIRADENTES', 'CANELA',
-      'BONITO', 'BLUMENAU', 'ANGRA DOS REIS', 'DIAMANTINA', 'ALTER DO CHÃO'
+      'BONITO', 'BLUMENAU', 'ANGRA', 'DIAMANTINA', 'ALTER DO CHÃO',
+      'MARIANA', 'CONGONHAS', 'SÃO JOÃO DEL REI', 'ALCÂNTARA', 'LENÇÓIS'
     ]
   },
   {
     id: 'carnaval',
-    title: 'Carnaval',
-    description: 'A maior festa popular do planeta',
+    title: 'Carnaval & Samba',
+    description: 'A maior celebração do mundo com ritmos vibrantes',
     iconName: 'Sparkles',
     words: [
       'FANTASIA', 'SAMBA', 'SAMBÓDROMO', 'SERPENTINA', 'CONFETE',
-      'BLOCO DE RUA', 'BATERIA', 'MESTRE SALA', 'PORTA BANDEIRA', 'ALEGORIA',
+      'BLOCO', 'BATERIA', 'MESTRE SALA', 'PORTA BANDEIRA', 'ALEGORIA',
       'ESTANDARTE', 'CORDÃO', 'TAMBORIM', 'CUÍCA', 'AGOGÔ',
       'MARACATU', 'FREVO', 'TRIO ELÉTRICO', 'ABADÁ', 'PASSISTA',
-      'ENREDO', 'CARRO ALEGÓRICO', 'PANDEIRO', 'REPIQUE', 'SURDO'
+      'ENREDO', 'CARRO', 'PANDEIRO', 'REPIQUE', 'SURDO'
     ]
   },
   {
     id: 'futebol',
-    title: 'Futebol',
-    description: 'A paixão nacional verde e amarela',
+    title: 'Paixão Futebol',
+    description: 'O país do futebol, ídolos e jogadas mágicas',
     iconName: 'Trophy',
     words: [
       'GOL', 'TORCIDA', 'DRIBLE', 'ESCANTEIO', 'PÊNALTI',
@@ -111,148 +123,267 @@ export const CATEGORIES: CategoryData[] = [
     ]
   },
   {
-    id: 'cultura_brasileira',
-    title: 'Cultura Brasileira',
-    description: 'Folclore, tradições e manifestações populares',
-    iconName: 'HeartHandshake',
+    id: 'pampas',
+    title: 'Culinária dos Pampas',
+    description: 'Churrasco, chimarrão e tradição do sul',
+    iconName: 'Flame',
     words: [
-      'CORDEL', 'CAPOEIRA', 'BOI BUMBÁ', 'FESTA JUNINA', 'CIRANDA',
-      'MACULELÊ', 'VIOLA CAIPIRA', 'SACI PERERÊ', 'CURUPIRA', 'IARA',
-      'ARTESANATO', 'REPENTE', 'CARRANCA', 'LITERATURA', 'BERIMBAU',
-      'FESTIVAL DE PARINTINS', 'BONECOS DE OLINDA', 'FANDANGO', 'CATIRA', 'FORRÓ'
+      'CHURRASCO', 'CHIMARRÃO', 'COSTELA', 'PICANHA', 'ESPETO',
+      'CUIA', 'BOMBA', 'FARROUPILHA', 'GAÚCHO', 'PONCHO',
+      'FANDANGO', 'GALPÃO', 'CAMPANHA', 'BOLEADEIRA', 'ERVA MATE',
+      'CHARQUE', 'ARROZ DE CARRETEIRO', 'MATAMBRE', 'LINGUIÇA', 'VINHO'
     ]
   },
   {
-    id: 'praia',
-    title: 'Praia e Verão',
-    description: 'Areia, mar e a energia do litoral brasileiro',
-    iconName: 'Sun',
+    id: 'dunas',
+    title: 'Lençóis & Dunas',
+    description: 'Oásis, ventos e lagoas de águas pluviais',
+    iconName: 'Waves',
     words: [
-      'AREIA', 'ONDA', 'MAR', 'CONCHA', 'GUARDA SOL',
-      'CANGA', 'ÁGUA DE COCO', 'PRANCHA', 'CALÇADÃO', 'MARESIA',
-      'SALVA VIDAS', 'BRISA', 'CASTELO DE AREIA', 'DUNA', 'FAROL',
-      'PROTETOR', 'ÓCULOS', 'SURFISTA', 'QUIOSQUE', 'MERGULHO',
-      'CHINELO', 'PÔR DO SOL', 'CORAIS', 'MARÉ ALTA', 'BANHO DE MAR'
-    ]
-  },
-  {
-    id: 'natureza',
-    title: 'Natureza & Biomas',
-    description: 'Cerrado, Pantanal, Amazônia e Mata Atlântica',
-    iconName: 'Trees',
-    words: [
-      'FLORESTA', 'PANTANAL', 'CACHOEIRA', 'RIO AMAZONAS', 'PLANALTO',
-      'VAGALUME', 'CERRADO', 'MATA ATLÂNTICA', 'MANGUEZAL', 'VEREDA',
-      'CAATINGA', 'GRUTA', 'CHAPADA', 'IGUAPÓ', 'SERRA DO MAR',
-      'IGARAPÉ', 'ARARIPE', 'RESTINGA', 'VITÓRIA RÉGIA', 'ORQUÍDEA'
+      'DUNAS', 'LAGOAS', 'AREIA BRANCA', 'VENTANIA', 'OÁSIS',
+      'ATINS', 'BARREIRINHAS', 'MANDACARU', 'RIO PREGUIÇAS', 'FAROL',
+      'VENTOS', 'BARCO', 'CAMINHADA', 'PÔR DO SOL', 'MIRANTE',
+      'ÁGUA DOCE', 'REFLEXO', 'SOL DOURADO', 'MARÉ', 'BUGGY'
     ]
   },
   {
     id: 'musica',
-    title: 'Música do Brasil',
-    description: 'Ritmos, harmonias e instrumentos brasileiros',
+    title: 'Ritmos do Brasil',
+    description: 'Bossa Nova, Choro, Samba-Rock e Axé',
     iconName: 'Music',
     words: [
-      'SAMBA', 'BOSSA NOVA', 'FORRÓ', 'CHORO', 'FREVO',
-      'MARACATU', 'BAIÃO', 'SERTANEJO', 'PAGODE', 'AXÉ',
-      'CAVAQUINHO', 'PANDEIRO', 'BERIMBAU', 'VIOLA', 'SURDO',
-      'ZABUMBA', 'TRIÂNGULO', 'SANFONA', 'TAMBORIM', 'CUÍCA'
+      'BOSSA NOVA', 'CHORO', 'AXÉ', 'FORRÓ', 'PAGODE',
+      'SAMBA ROCK', 'BAIÃO', 'XOTE', 'MARACATU', 'FREVO',
+      'CAVAQUINHO', 'VIOLÃO', 'PANDEIRO', 'TAMBOR', 'SANFONA',
+      'ZABUMBA', 'BERIMBAU', 'ATABAQUE', 'GUITARRA BAIANA', 'SURDO'
     ]
   },
   {
-    id: 'profissoes',
-    title: 'Profissões',
-    description: 'Carreiras e ofícios do dia a dia',
-    iconName: 'Briefcase',
+    id: 'culinaria_baiana',
+    title: 'Sabores da Bahia',
+    description: 'Dendê, pimenta, acarajé e axé na mesa',
+    iconName: 'Utensils',
     words: [
-      'PROFESSOR', 'MÉDICO', 'ENGENHEIRO', 'ADVOGADO', 'BOMBEIRO',
-      'JORNALISTA', 'ARQUITETO', 'COZINHEIRO', 'POLICIAL', 'VETERINÁRIO',
-      'ENFERMEIRO', 'PADEIRO', 'DENTISTA', 'MOTORISTA', 'CARPINTEIRO',
-      'ELETRICISTA', 'PESQUISADOR', 'MECÂNICO', 'COSTUREIRA', 'FARMACÊUTICO'
+      'ACARAJÉ', 'VATAPÁ', 'CARURU', 'MOQUECA', 'ABARÁ',
+      'AZEITE DE DENDÊ', 'PIMENTA', 'CAMARÃO SECO', 'BOBÓ', 'EFÓ',
+      'SARAPATEL', 'COCADA', 'BEIJU', 'MANIÇOBA', 'TUCUPI',
+      'LEITE DE COCO', 'CALDO DE SURURU', 'CASQUINHA', 'FAROFA', 'PIRÃO'
     ]
   },
   {
-    id: 'esportes',
-    title: 'Esportes',
-    description: 'Modalidades atléticas e jogos',
-    iconName: 'Activity',
+    id: 'culinaria_mineira',
+    title: 'Minas de Ouro & Sabores',
+    description: 'Fogão a lenha, cafezinho e queijo canastra',
+    iconName: 'Utensils',
     words: [
-      'FUTEBOL', 'VÔLEI', 'BASQUETE', 'FUTSAL', 'NATAÇÃO',
-      'JUDÔ', 'SURFE', 'CAPOEIRA', 'CICLISMO', 'SKATE',
-      'HANDEBOL', 'ATLETISMO', 'TÊNIS', 'BOXE', 'GINÁSTICA',
-      'REMO', 'HIPISMO', 'CANOAGEM', 'TIRO COM ARCO', 'VELA'
+      'PÃO DE QUEIJO', 'QUEIJO CANASTRA', 'FEIJÃO TROPEIRO', 'TUTU', 'TORRESMO',
+      'DOCE DE LEITE', 'GOIABADA', 'FRANGO COM QUIABO', 'LEITOA', 'COSTELINHA',
+      'BROA DE MILHO', 'CAFÉ COADO', 'PAMONHA', 'ANGU', 'COUVINHA',
+      'FAROFA DE MILHO', 'CANJICA', 'DOCE DE FIGO', 'RAPADURA', 'CACHAÇA'
     ]
   },
   {
-    id: 'viagens',
-    title: 'Viagens & Aventura',
-    description: 'Explorando novos caminhos e destinos',
+    id: 'noronha',
+    title: 'Fernando de Noronha',
+    description: 'Santuário marinho de águas cristalinas',
     iconName: 'Compass',
     words: [
-      'BAGAGEM', 'AVIÃO', 'PASSAPORTE', 'MAPA', 'TRILHA',
-      'POUSADA', 'MOCHILA', 'ROTEIRO', 'EXCURSÃO', 'MIRANTE',
-      'BILHETE', 'CRUZEIRO', 'DESTINO', 'EMBARQUE', 'AEROPORTO',
-      'BÚSSOLA', 'CAMPING', 'HOSPEDAGEM', 'GUIA', 'MALAS'
+      'GOLFINHO ROTADOR', 'TARTARUGA MARINHA', 'TUBARÃO LIXA', 'BAÍA DO SANCHO', 'MORRO DO PICO',
+      'BAÍA DOS PORCOS', 'MERGULHO', 'CORAIS', 'ARQUIPÉLAGO', 'MIRANTE',
+      'PRAIA DO LEÃO', 'ATALAIA', 'ÁGUA CRISTALINA', 'SNORKEL', 'BANCO DE AREIA',
+      'CARDUME', 'PÔR DO SOL', 'BARCO', 'PRESERVAÇÃO', 'OCEANO'
     ]
   },
   {
-    id: 'escola',
-    title: 'Escola & Conhecimento',
-    description: 'O universo da sala de aula e do aprendizado',
-    iconName: 'GraduationCap',
+    id: 'folclore',
+    title: 'Folclore & Lendas',
+    description: 'Mitos ancestrais e personagens do imaginário popular',
+    iconName: 'Sparkles',
     words: [
-      'CADERNO', 'LÁPIS', 'BORRACHA', 'MOCHILA', 'BIBLIOTECA',
-      'RECREIO', 'RÉGUA', 'PROVA', 'QUADRO', 'CANETA',
-      'TESOURA', 'APONTADOR', 'ESTOJO', 'LIVRO', 'DICIONÁRIO',
-      'COMPASSO', 'PROFESSORA', 'EXERCÍCIO', 'APOSTILA', 'CALCULADORA'
+      'SACI PERERÊ', 'CURUPIRA', 'IARA', 'BOTO ROSA', 'CAIPORA',
+      'MULA SEM CABEÇA', 'BOITATÁ', 'LOBISOMEM', 'NEGRINHO', 'VITÓRIA RÉGIA',
+      'COBRA GRANDE', 'MAPINGUARI', 'MATINTA PEREIRA', 'PISADEIRA', 'CORPO SECO',
+      'ALAMOIA', 'CUCA', 'CABOCLO D ÁGUA', 'MÃE DO OURO', 'UIRAPURU'
     ]
   },
   {
-    id: 'familia',
-    title: 'Família & União',
-    description: 'Laços de afeto e parentesco',
-    iconName: 'Users',
+    id: 'jalapao',
+    title: 'Jalapão Encantado',
+    description: 'Fervedouros, dunas cor de ouro e capim dourado',
+    iconName: 'Sun',
     words: [
-      'AVÔ', 'AVÓ', 'PRIMO', 'TIO', 'IRMÃO',
-      'SOBRINHO', 'PADRINHO', 'MADRINHA', 'BISAVÔ', 'NETO',
-      'PAI', 'MÃE', 'CUNHADO', 'NORA', 'GENRO',
-      'ENFRENTAR', 'ABRAÇO', 'AFETO', 'CASAL', 'INFÂNCIA'
+      'FERVEDOURO', 'CAPIM DOURADO', 'DUNAS', 'SERRA DO ESPÍRITO SANTO', 'CACHOEIRA DA VELHA',
+      'PRAINHA', 'BURITI', 'ÁGUA AZUL', 'CHAPADA', 'ARTESANATO',
+      'MATEIROS', 'PONTE ALTA', 'EXPEDIÇÃO', 'SAFARI', 'CANAVIAL',
+      'VEREDA', 'CANHÃO', 'PÔR DO SOL', 'ESTRADA DE TERRA', 'FLUTUAÇÃO'
     ]
   },
   {
-    id: 'tecnologia',
-    title: 'Tecnologia & Inovação',
-    description: 'O mundo digital contemporâneo',
-    iconName: 'Cpu',
+    id: 'cataratas',
+    title: 'Cataratas & Iguaçu',
+    description: 'A força monumental das águas e arco-íris',
+    iconName: 'Waves',
     words: [
-      'COMPUTADOR', 'CELULAR', 'INTERNET', 'ROBÔ', 'ALGORITMO',
-      'SATÉLITE', 'MEMÓRIA', 'TELA', 'BATERIA', 'TECLADO',
-      'MICROFONE', 'CONEXÃO', 'BLUETOOTH', 'ROTEADOR', 'PROGRAMAÇÃO',
-      'APLICATIVO', 'DADOS', 'CIRCUITO', 'SENHA', 'SERVIDOR'
+      'GARGANTA DO DIABO', 'CATARATAS', 'ARCO ÍRIS', 'PASSARELA', 'RIO IGUAÇU',
+      'PARQUE NACIONAL', 'QUEDAS D ÁGUA', 'BORRIFO', 'BARCO MACUCO', 'MATA ATLÂNTICA',
+      'QUATI', 'BORBOLETÁRIO', 'MIRANTE', 'TRÍPLICE FRONTEIRA', 'BALSAS',
+      'TURBULÊNCIA', 'NÉVOA', 'VOLUME', 'ESPETÁCULO', 'CORRENTEZA'
     ]
   },
   {
-    id: 'filmes',
-    title: 'Cinema & Filmes',
-    description: 'A sétima arte e produção audiovisual',
-    iconName: 'Film',
+    id: 'parintins',
+    title: 'Festival de Parintins',
+    description: 'O duelo mágico entre o Garantido e o Caprichoso',
+    iconName: 'Sparkles',
     words: [
-      'CINEMA', 'DIRETOR', 'ATOR', 'COMÉDIA', 'DRAMA',
-      'ROTEIRO', 'PIPOCA', 'ESTREIA', 'SESSÃO', 'DUBLADOR',
-      'CÂMERA', 'FIGURINO', 'EFEITO', 'BILHETERIA', 'TELÃO',
-      'TRILHA SONORA', 'DOCUMENTÁRIO', 'ANIMAÇÃO', 'SUSPENSE', 'CLAQUETE'
+      'BOI GARANTIDO', 'BOI CAPRICHOSO', 'BUMBÓDROMO', 'CUNHÃ PORANGA', 'PAJÉ',
+      'SINHÁZINHA', 'PORTA ESTANDARTE', 'BATUCADA', 'MARUJADA', 'TOADA',
+      'ALEGORIA GIGANTE', 'TRIBOS INDÍGENAS', 'AMAZÔNIA', 'VERMELHO', 'AZUL',
+      'FESTA POPULAR', 'TORCIDA APAIXONADA', 'RITMO', 'AUTO DO BOI', 'LENDA'
     ]
   },
   {
-    id: 'objetos',
-    title: 'Objetos do Cotidiano',
-    description: 'Coisas presentes em nossas casas',
-    iconName: 'Box',
+    id: 'canastra',
+    title: 'Serra da Canastra',
+    description: 'Nascentes do Rio São Francisco e paredões de pedra',
+    iconName: 'Compass',
     words: [
-      'CADEIRA', 'RELÓGIO', 'CHAVE', 'ESPELHO', 'JANELA',
-      'GARRAFA', 'ALMOFADA', 'CANECA', 'LIVRO', 'TESOURA',
-      'ABAJUR', 'TAPETE', 'CANETA', 'QUADRO', 'PORTA',
-      'VASO', 'VENTILADOR', 'TELEFONE', 'PRATO', 'GARFO'
+      'CASCA D ANTA', 'RIO SÃO FRANCISCO', 'NASCENTE', 'LOBO GUARÁ', 'TAMANDUÁ BANDEIRA',
+      'PATRIMÔNIO', 'CHAPADÃO', 'QUEIJARIA', 'PAREDÃO', 'TRILHA',
+      'VEADO CAMPEIRO', 'GAVIÃO REAL', 'CURRAL DE PEDRA', 'CACHOEIRA', 'SERRA',
+      'MIRANTE DO ROLADOR', 'CÂNION', 'POÇO AZUL', 'VENTANIA', 'ECOTURISMO'
+    ]
+  },
+  {
+    id: 'metropole',
+    title: 'São Paulo Metrópole',
+    description: 'Arte urbana, culinária do mundo e energia pulsante',
+    iconName: 'Landmark',
+    words: [
+      'AVENIDA PAULISTA', 'MASP', 'IBIRAPUERA', 'MERCADO MUNICIPAL', 'PINALCOTECA',
+      'LIBERDADE', 'VILA MADALENA', 'BECO DO BATMAN', 'TEATRO MUNICIPAL', 'FAROL SANTANDER',
+      'PASTEL DE FEIRA', 'SANDUÍCHE DE MORTADELA', 'METRÔ', 'VIADUTO DO CHÁ', 'RUA 25 DE MARÇO',
+      'GRAFITE', 'CULTURA', 'ARRANHA CÉU', 'GASTRONOMIA', 'PAULISTANO'
+    ]
+  },
+  {
+    id: 'rio_maravilha',
+    title: 'Rio Cidade Maravilhosa',
+    description: 'Cristo Redentor, Pão de Açúcar e calçadões',
+    iconName: 'Sun',
+    words: [
+      'CRISTO REDENTOR', 'PÃO DE AÇÚCAR', 'COPACABANA', 'IPANEMA', 'LEBLON',
+      'CORCOVADO', 'ARPOADOR', 'BONDINHO', 'LAPA', 'ARCOS DA LAPA',
+      'MARACANÃ', 'FLORESTA DA TIJUCA', 'PEDRA DA GÁVEA', 'MIRANTE DONA MARTA', 'SAMBÓDROMO',
+      'BOSSA NOVA', 'CHOPP GELADO', 'ÁGUA DE COCO', 'GAROTA DE IPANEMA', 'CARIOCA'
+    ]
+  },
+  {
+    id: 'veadeiros',
+    title: 'Chapada dos Veadeiros',
+    description: 'Quartzo, cânions profundos e cachoeiras místicas',
+    iconName: 'Trees',
+    words: [
+      'VALE DA LUA', 'CACHOEIRA SANTA BÁRBARA', 'ALTO PARAÍSO', 'SÃO JORGE', 'PARQUE NACIONAL',
+      'SALTO DO RIO PRETO', 'CANIONS', 'CRISTAIS DE QUARTZO', 'MIRANTE DA JANELA', 'ÁGUA CRISTALINA',
+      'CERRADO', 'TRILHA DAS SETE QUEDAS', 'ENCONTRO DAS ÁGUAS', 'POÇO ENCANTADO', 'ARIRANHA',
+      'FLOR DO CERRADO', 'SERRANIA', 'ASTROTURISMO', 'CÉU ESTRELADO', 'MISTICISMO'
+    ]
+  },
+  {
+    id: 'cacau',
+    title: 'Riquezas do Cacau',
+    description: 'Fazendas históricas da Costa do Cacau e chocolate',
+    iconName: 'Apple',
+    words: [
+      'FRUTO DO CACAU', 'CHOCOLATE ARTESANAL', 'ILHÉUS', 'CABRUCA', 'FAZENDA HISTÓRICA',
+      'BARRACOTE', 'SECAGEM AO SOL', 'MEL DE CACAU', 'BATALHA DE GABRIELA', 'VESÚVIO',
+      'BATACLAN', 'LITORAL SUL', 'ITACARÉ', 'MATA VERDE', 'AMÊNDOA',
+      'FERMENTAÇÃO', 'MOAGEM', 'BOMBONIERE', 'TRADIÇÃO', 'CHOCÓLATRAS'
+    ]
+  },
+  {
+    id: 'festas_juninas',
+    title: 'Festas Juninas do Brasil',
+    description: 'Caruaru, Campina Grande, fogueiras e bandeirinhas',
+    iconName: 'Flame',
+    words: [
+      'FOGUEIRA', 'QUADRILHA', 'SANFONEIRO', 'BANDEIRINHA', 'BALÃO',
+      'PAMONHA', 'CANJICA', 'CURAU', 'PÉ DE MOLEQUE', 'QUENTÃO',
+      'MAÇÃ DO AMOR', 'MILHO VERDE', 'CARUARU', 'CAMPINA GRANDE', 'SÃO JOÃO',
+      'SANTO ANTÔNIO', 'SÃO PEDRO', 'XOTE', 'CASAMENTO NA ROÇA', 'CHAPÉU DE PALHA'
+    ]
+  },
+  {
+    id: 'artesanato',
+    title: 'Artesanato & Tradições',
+    description: 'Barro, renda, cerâmica marajoara e esculturas',
+    iconName: 'Sparkles',
+    words: [
+      'CERÂMICA MARAJOARA', 'BARRO DE CARUARU', 'RENDA DE BILRO', 'CARRANCA DE MADEIRA', 'CAPIM DOURADO',
+      'BORDADO DE CAICÓ', 'TALHA EM MADEIRA', 'FIBRA DE BURITI', 'PANELA DE BARRO', 'XILOGRAVURA',
+      'ESCULTURA', 'TEAR MANUAL', 'CESTAS DE PALHA', 'RENDA RENASCENÇA', 'CHITA COLORIDA',
+      'MARACÁ', 'CUIAS PINTADAS', 'ARTE INDÍGENA', 'BIJUTERIA NATURAL', 'MESTRE ARTESÃO'
+    ]
+  },
+  {
+    id: 'noronha',
+    title: 'Fernando de Noronha',
+    description: 'Águas cristalinas, santuário de golfinhos e praia do Sancho',
+    iconName: 'Waves',
+    words: [
+      'BAÍA DO SANCHO', 'MORRO DO PICO', 'BAÍA DOS PORCOS', 'GOLFINHO ROTADOR', 'TARTARUGA MARINHA',
+      'BURACO DO GALAIS', 'PRAIA DO LEÃO', 'CACIMBA DO PADRE', 'MERGULHO', 'ARQUIPÉLAGO',
+      'ATOL DAS ROCAS', 'TUBARÃO LIXA', 'CORAIS', 'MIRANTE DOS BOLINHOS', 'PARQUE MARINHO',
+      'PRESERVAÇÃO', 'ÁGUA ESMERALDA', 'PÔR DO SOL', 'FORTALEZA DOS REMÉDIOS', 'ILHA DOS RATOS'
+    ]
+  },
+  {
+    id: 'diamantina',
+    title: 'Chapada Diamantina',
+    description: 'Cânions imponentes, poços azuis e cachoeira da Fumaça',
+    iconName: 'Compass',
+    words: [
+      'CACHOEIRA DA FUMAÇA', 'MORRO DO PAI INÁCIO', 'POÇO AZUL', 'POÇO ENCANTADO', 'LENÇÓIS',
+      'VALE DO PATI', 'CAVERNA DA LAPA', 'RIO DE CONTAS', 'IGATU', 'SERRA DO SINCORÁ',
+      'GRUTA DA PRATINHA', 'DIAMANTE', 'GARIMPO HISTÓRICO', 'TRILHA DOS CÂNIONS', 'MUCUGÊ',
+      'ANDARAÍ', 'CACHOEIRA DO BURACÃO', 'ORQUÍDEA RARA', 'PEDRA DO CASTELO', 'ECOTURISMO'
+    ]
+  },
+  {
+    id: 'vinhedos',
+    title: 'Vale dos Vinhedos',
+    description: 'Serra Gaúcha, tradição italiana e colheita das uvas',
+    iconName: 'Apple',
+    words: [
+      'BENTO GONÇALVES', 'GARIBALDI', 'MONTE BELO DO SUL', 'COLHEITA DA UVA', 'PARREIRAL',
+      'ESPUMANTE', 'VINHO ARTESANAL', 'CANTINA TÍPICA', 'POLENTA NA CHAPA', 'GALETO AL PRIMO',
+      'TRENZINHO DA MARIA FUMAÇA', 'IMIGRAÇÃO ITALIANA', 'BARRIL DE CARVALHO', 'DEGUSTAÇÃO', 'PISA DA UVA',
+      'SERRA GAÚCHA', 'QUEIJOS FINOS', 'VALE DOS PARREIRAIS', 'SOPRANO', 'FESTA DA VINDIMA'
+    ]
+  },
+  {
+    id: 'emocoes',
+    title: 'Rota das Emoções',
+    description: 'Lençóis Maranhenses, Delta do Parnaíba e Jericoacoara',
+    iconName: 'Sun',
+    words: [
+      'LENÇÓIS MARANHENSES', 'DELTA DO PARNAÍBA', 'JERICOACOARA', 'PEDRA FURADA', 'LAGOA AZUL',
+      'LAGOA BONITA', 'DUNAS DE AREIA', 'GUARÁ VERMELHO', 'BARREIRINHAS', 'RIO PREGUIÇAS',
+      'CANDEIAS', 'VELEJAR', 'KITESURF', 'ÁGUA DOCE', 'CARRO 4X4',
+      'CAMOCIM', 'PÔR DO SOL NA DUNA', 'FAROL DE MANDACARU', 'REDE NA ÁGUA', 'MANGUE DOCE'
+    ]
+  },
+  {
+    id: 'brasil_ouro',
+    title: 'Grande Brasil Imperial',
+    description: 'Monumentos, palácios, glórias históricas e tesouros da pátria',
+    iconName: 'Trophy',
+    words: [
+      'PALÁCIO IMPERIAL', 'COROA REAL', 'MUSEU DO IPIRANGA', 'PETRÓPOLIS', 'INDEPENDÊNCIA',
+      'ESTRADA REAL', 'OURO PRETO', 'TIRADENTES', 'ARQUIVO NACIONAL', 'MONUMENTO DA PÁTRIA',
+      'CARROSSEL DE OURO', 'JARDIM BOTÂNICO', 'BIBLIOTECA NACIONAL', 'QUINTA DA BOA VISTA', 'BRASÃO NACIONAL',
+      'ORDEM E PROGRESSO', 'REPÚBLICA', 'CRUZ DE MALTA', 'HERÓIS NACIONAIS', 'GLÓRIA ETERNA'
     ]
   }
 ];
