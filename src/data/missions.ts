@@ -18,7 +18,7 @@ export const GLOBAL_MISSIONS: Mission[] = [
   {
     id: 'find_words_tier',
     title: 'Caçador de Palavras',
-    description: 'Encontre palavras nas grades do Brasil',
+    description: 'Encontre palavras nas grades do universo',
     category: 'words',
     currentProgress: 0,
     targetProgress: 8,
@@ -31,7 +31,7 @@ export const GLOBAL_MISSIONS: Mission[] = [
   {
     id: 'solve_levels_tier',
     title: 'Explorador de Fases',
-    description: 'Conclua fases da jornada brasileira',
+    description: 'Conclua fases da jornada cósmica',
     category: 'levels',
     currentProgress: 0,
     targetProgress: 2,
@@ -96,7 +96,7 @@ export function generateChapterMissions(chapterId: number, chapterName: string):
     { title: 'Explorador Atento', desc: `Encontre 12 palavras nas grades`, target: 12, reward: 50, cat: 'words' as const },
     { title: 'Desafio Médio', desc: `Vença 1 fase no modo Médio`, target: 1, reward: 50, cat: 'difficulty' as const },
     { title: 'Caminho Seguro', desc: `Conclua 5 fases deste capítulo`, target: 5, reward: 55, cat: 'levels' as const },
-    { title: 'Vocabulário Vivo', desc: `Encontre 20 palavras brasileiras`, target: 20, reward: 60, cat: 'words' as const },
+    { title: 'Vocabulário Vivo', desc: `Encontre 20 palavras estelares`, target: 20, reward: 60, cat: 'words' as const },
     { title: 'Mente Serena', desc: `Vença 2 fases sem usar dicas`, target: 2, reward: 60, cat: 'hints' as const },
     { title: 'Desafio Difícil', desc: `Vença 1 fase no modo Difícil (16 palavras)`, target: 1, reward: 70, cat: 'difficulty' as const },
     { title: 'Meio do Percurso', desc: `Chegue até a fase 10 do capítulo`, target: 10, reward: 75, cat: 'levels' as const },
@@ -104,21 +104,21 @@ export function generateChapterMissions(chapterId: number, chapterName: string):
     { title: 'Perspicácia', desc: `Vença 3 fases consecutivas com 3 estrelas`, target: 3, reward: 80, cat: 'levels' as const },
     { title: 'Proeza Mestre', desc: `Vença 1 partida no modo Mestre (20 palavras)`, target: 1, reward: 90, cat: 'difficulty' as const },
     { title: 'Metade Conquistada', desc: `Conclua 15 fases de ${chapterName}`, target: 15, reward: 95, cat: 'levels' as const },
-    { title: 'Enciclopédia Nativa', desc: `Encontre 50 palavras na região`, target: 50, reward: 100, cat: 'words' as const },
+    { title: 'Enciclopédia Cósmica', desc: `Encontre 50 palavras no cosmos`, target: 50, reward: 100, cat: 'words' as const },
     { title: 'Precisão Cirúrgica', desc: `Vença 4 fases sem usar dicas`, target: 4, reward: 105, cat: 'hints' as const },
     { title: 'Ritmo Forte', desc: `Complete 18 fases deste percurso`, target: 18, reward: 110, cat: 'levels' as const },
-    { title: 'Colecionador de Termos', desc: `Encontre 65 palavras no bioma`, target: 65, reward: 115, cat: 'words' as const },
+    { title: 'Colecionador de Termos', desc: `Encontre 65 palavras no espaço`, target: 65, reward: 115, cat: 'words' as const },
     { title: 'Superando Desafios', desc: `Vença 3 partidas no modo Difícil`, target: 3, reward: 120, cat: 'difficulty' as const },
     { title: 'Reta Decisiva', desc: `Alcance 20 fases concluídas`, target: 20, reward: 125, cat: 'levels' as const },
     { title: 'Visão Panorâmica', desc: `Encontre 80 palavras no capítulo`, target: 80, reward: 130, cat: 'words' as const },
     { title: 'Gênio do Caça-Palavras', desc: `Vença 5 fases sem dicas`, target: 5, reward: 135, cat: 'hints' as const },
     { title: 'Quase no Fim', desc: `Conclua 24 fases de ${chapterName}`, target: 24, reward: 140, cat: 'levels' as const },
-    { title: 'Mestre Vocabular', desc: `Encontre 100 palavras na região`, target: 100, reward: 150, cat: 'words' as const },
+    { title: 'Mestre Vocabular', desc: `Encontre 100 palavras na galáxia`, target: 100, reward: 150, cat: 'words' as const },
     { title: 'Glória dos Mestres', desc: `Vença 2 partidas no modo Mestre`, target: 2, reward: 160, cat: 'difficulty' as const },
     { title: 'Penúltimo Degrau', desc: `Conclua 27 fases deste capítulo`, target: 27, reward: 170, cat: 'levels' as const },
     { title: 'Gabarito Impecável', desc: `Encontre 120 palavras totais`, target: 120, reward: 180, cat: 'words' as const },
     { title: 'Perto da Coroa', desc: `Conclua 29 fases de ${chapterName}`, target: 29, reward: 190, cat: 'levels' as const },
-    { title: 'Coroação do Capítulo', desc: `Complete as 30 fases de ${chapterName} e domine o bioma!`, target: 30, reward: 250, cat: 'chapter' as const }
+    { title: 'Coroação do Capítulo', desc: `Complete as 30 fases de ${chapterName} e domine o cosmos!`, target: 30, reward: 250, cat: 'chapter' as const }
   ];
 
   for (let i = 0; i < 30; i++) {

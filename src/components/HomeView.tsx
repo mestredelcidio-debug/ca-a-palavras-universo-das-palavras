@@ -146,7 +146,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <button
             onClick={onOpenChapters}
             className="w-11 h-11 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white flex items-center justify-center shadow-lg border-2 border-white/70 active:scale-90 transition-all cursor-pointer"
-            title="Capítulos do Brasil"
+            title="Capítulos do Universo"
           >
             <List className="w-5 h-5 stroke-[2.5]" />
           </button>

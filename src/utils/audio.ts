@@ -1,5 +1,5 @@
 /**
- * Web Audio API procedural sound synthesizer for Caça-Palavras Brasil
+ * Web Audio API procedural sound synthesizer for Universo das Palavras
  * Zero external audio assets required; lightweight, immediate latency.
  */
 

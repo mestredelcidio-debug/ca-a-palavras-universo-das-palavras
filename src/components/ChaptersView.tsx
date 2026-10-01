@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowLeft, Lock, Check, Star, Coins, Sparkles, Palette } from 'lucide-react';
 import { CoinPill } from './CoinPill';
 import { CHAPTERS, ChapterData } from '../data/chapters';
-import beachThumbnail from '../assets/images/beach_paradise_bg_1790595434475.jpg';
+import cosmosThumbnail from '../assets/images/cosmos_nebula_bg_1790823307384.jpg';
 
 interface ChaptersViewProps {
   currentLevel: number;
@@ -46,7 +46,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
         </div>
 
         <h1 className="font-display font-black text-sm text-white uppercase tracking-wider">
-          Capítulos do Brasil (30)
+          Mundos do Universo (30)
         </h1>
 
         <CoinPill coins={coins} onOpenRewardBoxes={() => {}} />
@@ -121,7 +121,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
                     className="w-20 h-28 rounded-xl overflow-hidden border-2 border-blue-400 shadow-md cursor-pointer hover:scale-105 transition-transform relative bg-sky-100"
                   >
                     <img
-                      src={beachThumbnail}
+                      src={cosmosThumbnail}
                       alt={chapter.subtitle}
                       className="w-full h-full object-cover"
                     />

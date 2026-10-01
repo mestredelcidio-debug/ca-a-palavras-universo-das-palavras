@@ -20,7 +20,6 @@ import { isGiftAvailableToday } from './data/dailyGifts';
 import { GAME_MODES, GameModeDefinition, ConsumableItem } from './data/gameModes';
 import { GameModesModal } from './components/GameModesModal';
 import { getNatureBackgroundById } from './data/natureBackgrounds';
-import beachBg from './assets/images/beach_paradise_bg_1790595434475.jpg';
 
 const GLOBAL_MISSIONS_KEY = 'caca_palavras_global_missions_v2';
 const CHAPTER_MISSIONS_KEY = 'caca_palavras_chapter_missions_v2';

@@ -175,8 +175,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
             {/* Footer Version Info */}
             <div className="flex items-center justify-between pt-1 text-[11px] text-slate-400 font-bold px-2">
-              <span>CAÇA-PALAVRAS BRASIL</span>
-              <span>v4.8.0</span>
+              <span>UNIVERSO DAS PALAVRAS</span>
+              <span>v5.0.0 Cósmico</span>
             </div>
           </div>
         )}

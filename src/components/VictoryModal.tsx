@@ -40,10 +40,10 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
 
       try {
         confetti({
-          particleCount: 90,
-          spread: 80,
+          particleCount: 95,
+          spread: 85,
           origin: { y: 0.6 },
-          colors: ['#009c3b', '#ffdf00', '#002776', '#ffffff', '#10b981', '#f59e0b']
+          colors: ['#8b5cf6', '#ec4899', '#06b6d4', '#fbbf24', '#ffffff', '#a855f7', '#38bdf8']
         });
       } catch {
         // Ignore confetti errors

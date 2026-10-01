@@ -8,6 +8,248 @@ export interface CategoryData {
 
 export const CATEGORIES: CategoryData[] = [
   {
+    id: 'sistema_solar',
+    title: 'Sistema Solar & Planetas',
+    description: 'Sol, órbitas, luas e os planetas que orbitam nossa estrela',
+    iconName: 'Sun',
+    words: [
+      'SOL', 'MERCÚRIO', 'VÊNUS', 'TERRA', 'MARTE',
+      'JÚPITER', 'SATURNO', 'URANO', 'NETUNO', 'PLUTÃO',
+      'ÓRBITA', 'GRAVIDADE', 'ATMOSFERA', 'ROTACAO', 'TRANSLACAO',
+      'ECLÍPTICA', 'CORONA', 'HELIOSFERA', 'PLANETA', 'ASTRÔNOMO',
+      'MAGNETOSFERA', 'VENTO SOLAR', 'DIA', 'NOITE', 'EQUINÓCIO',
+      'SOLSTÍCIO', 'EIXO', 'PERIÉLIO', 'AFÉLIO', 'SISTEMA'
+    ]
+  },
+  {
+    id: 'lua',
+    title: 'A Lua & Satélites',
+    description: 'Mares de regolito, fases lunares e crateras celestes',
+    iconName: 'Moon',
+    words: [
+      'LUA CHEIA', 'CRESCENTE', 'MINGUANTE', 'LUA NOVA', 'CRATERA',
+      'REGOLITO', 'MARÉ ALTA', 'ECLIPSE', 'APOLO', 'ALUNISSAGEM',
+      'GRAVIDADE', 'SATÉLITE', 'ORBITAL', 'LADO OCULTO', 'MARES LUNARES',
+      'TRANQUILIDADE', 'PÓ LUNAR', 'BASALTO', 'REFLEXO', 'NOITE'
+    ]
+  },
+  {
+    id: 'marte',
+    title: 'Marte & O Planeta Vermelho',
+    description: 'Olympus Mons, Valles Marineris e rovers de exploração',
+    iconName: 'Flame',
+    words: [
+      'MARTE', 'MONTE OLIMPO', 'PERSEVERANCE', 'CURIOSITY', 'ROVER',
+      'ÓXIDO DE FERRO', 'VALES', 'CALOTA POLAR', 'FOBOS', 'DEIMOS',
+      'CRATERA GALE', 'DUNAS', 'ATMOSFERA', 'ROCHAS', 'EXPLORAÇÃO',
+      'AERÓLITO', 'DESERTO', 'SOLO RUBRO', 'SONDA', 'MISSÃO'
+    ]
+  },
+  {
+    id: 'asteroides',
+    title: 'Cinturão de Asteroides',
+    description: 'Ceres, Vesta, fragmentos e cometas primitivos',
+    iconName: 'Compass',
+    words: [
+      'ASTEROIDE', 'CERES', 'VESTA', 'PALLAS', 'HIGIA',
+      'METEORITO', 'METEORO', 'CRATERA', 'COLISÃO', 'ORBITA',
+      'FRAGMENTO', 'CONDRO', 'NÍQUEL', 'FERRO', 'ESPACIAL',
+      'DETRITOS', 'TRAJETÓRIA', 'IMPACTO', 'MINERAÇÃO', 'CINTURÃO'
+    ]
+  },
+  {
+    id: 'jupiter',
+    title: 'Júpiter & Os Gigantes',
+    description: 'A Grande Mancha Vermelha, ventos e tempestades colossais',
+    iconName: 'Sparkles',
+    words: [
+      'JÚPITER', 'GRANDE MANCHA', 'EUROPA', 'GANIMEDES', 'CALISTO',
+      'IO', 'VULCÕES', 'CICLONE', 'HIDROGÊNIO', 'HÉLIO',
+      'AURORA', 'CAMPO MAGNÉTICO', 'GASOSO', 'RADIAÇÃO', 'JUNO',
+      'GALILEU', 'PRESSÃO', 'NUVENS', 'FAIXAS', 'VÓRTICE'
+    ]
+  },
+  {
+    id: 'saturno',
+    title: 'Saturno & Anéis Celestes',
+    description: 'A beleza dos anéis de gelo e as luas fascinantes',
+    iconName: 'Sparkles',
+    words: [
+      'SATURNO', 'ANÉIS', 'TITÃ', 'ENCÉLADO', 'MIMAS',
+      'DIVISÃO CASSINI', 'GELO', 'METANO', 'CASSINI', 'HUYGENS',
+      'HEXÁGONO', 'GASOSO', 'ÓRBITA', 'DENSIDADE', 'PASTORA',
+      'PARTÍCULAS', 'BRILHO', 'ATMOSFERA', 'SOMBRA', 'ESPACIAL'
+    ]
+  },
+  {
+    id: 'gigantes_gelo',
+    title: 'Urano & Netuno de Gelo',
+    description: 'Mundos azul-cobalto e ventos supersônicos',
+    iconName: 'Waves',
+    words: [
+      'URANO', 'NETUNO', 'TRITÃO', 'METANO', 'AZUL',
+      'GELADO', 'VENTO FORTE', 'ANÉIS ESCUROS', 'VOYAGER', 'INCLINAÇÃO',
+      'DIAMANTES', 'ATMOSFERA', 'PRESSÃO', 'EXTREMO', 'AURORAS',
+      'NUVENS BRANCAS', 'ÓRBITA LONGA', 'FRIO', 'DISTÂNCIA', 'SISTEMA'
+    ]
+  },
+  {
+    id: 'kuiper',
+    title: 'Cinturão de Kuiper & Plutão',
+    description: 'Plutão, Caronte e a fronteira do sistema solar',
+    iconName: 'Compass',
+    words: [
+      'PLUTÃO', 'CARONTE', 'KUIPER', 'MAKEMAKE', 'HAUMEA',
+      'ÉRIS', 'SEDNA', 'GELO DE NITROGÊNIO', 'NEW HORIZONS', 'CORAÇÃO',
+      'MONTANHAS DE GELO', 'ANÃO', 'ESCURIDÃO', 'FRONTEIRA', 'ÓRBITA',
+      'DISTÂNCIA', 'SOL PÁLIDO', 'SISTEMA DUPLO', 'ESPACIAL', 'INFINITO'
+    ]
+  },
+  {
+    id: 'orion',
+    title: 'Constelação de Órion',
+    description: 'As Três Marias, Betelgeuse e o caçador celeste',
+    iconName: 'Sparkles',
+    words: [
+      'ÓRION', 'BETELGEUSE', 'RIGEL', 'BELLATRIX', 'SAIPH',
+      'ALNITAK', 'ALNILAM', 'MINTAKA', 'TRÊS MARIAS', 'CINTURÃO',
+      'CAÇADOR', 'CONSTELAÇÃO', 'ESTRELA', 'BRILHO', 'CÉU NOTURNO',
+      'ASTRONOMIA', 'MITOLOGIA', 'GIGANTE', 'AZUL', 'VERMELHA'
+    ]
+  },
+  {
+    id: 'nebulosa_orion',
+    title: 'Nebulosa M42 de Órion',
+    description: 'Berçário de novas estrelas e poeira interestelar',
+    iconName: 'Sparkles',
+    words: [
+      'NEBULOSA', 'BERÇÁRIO', 'HIDROGÊNIO', 'TRAPÉZIO', 'POEIRA',
+      'GÁS CÓSMICO', 'PROTOESTRELA', 'ULTRAVIOLETA', 'EMISSÃO', 'REFLEXÃO',
+      'LUMINOSIDADE', 'TELESCÓPIO', 'HUBBLE', 'JAMES WEBB', 'COR',
+      'VIOLETA', 'MAGENTA', 'NASCIMENTO', 'GRAVITAÇÃO', 'MATÉRIA'
+    ]
+  },
+  {
+    id: 'cruzeiro_sul',
+    title: 'Cruzeiro do Sul & Estrelas Guia',
+    description: 'Símbolo celeste do hemisfério sul e suas constelações',
+    iconName: 'Compass',
+    words: [
+      'CRUZEIRO DO SUL', 'ACRUX', 'GACRUX', 'MIMOSA', 'INTROMETIDA',
+      'SACO DE CARVÃO', 'CENTAURO', 'ALFA CENTAURI', 'PRÓXIMA', 'GUIA',
+      'NAVEGAÇÃO', 'CÉU DO SUL', 'ASTRÔNOMOS', 'CONSTELAÇÃO', 'BRILHANTE',
+      'ESTRELA POLAR', 'NOITE', 'CÉU LIMPO', 'HORIZONTE', 'AURORA'
+    ]
+  },
+  {
+    id: 'supergigantes',
+    title: 'Estrelas Supergigantes',
+    description: 'Monstros celestes com diâmetros colossais',
+    iconName: 'Flame',
+    words: [
+      'SUPERGIGANTE', 'BETELGEUSE', 'ANTARES', 'UY SCUTI', 'VY CANIS',
+      'RIGEL', 'DENEB', 'PISTOLA', 'FUSÃO NUCLEAR', 'CARBONO',
+      'OXIGÊNIO', 'NÚCLEO', 'RADIAÇÃO', 'VENTO ESTELAR', 'FIM DA VIDA',
+      'MAGNITUDE', 'LUMINOSIDADE', 'ESPECTRO', 'ASTRONOMIA', 'ENERGIA'
+    ]
+  },
+  {
+    id: 'supernovas',
+    title: 'Supernovas & Clarões',
+    description: 'O espetáculo do colapso e nascimento dos elementos',
+    iconName: 'Sparkles',
+    words: [
+      'SUPERNOVA', 'EXPLOSÃO', 'COLAPSO', 'NÚCLEO', 'ONDA DE CHOQUE',
+      'CARANGUEJO', 'REMANESCENTE', 'ELEMENTOS', 'FERRO', 'OURO',
+      'PLATINA', 'URÂNIO', 'BRILHO MÁXIMO', 'LUZ CÓSMICA', 'POEIRA',
+      'NEUTRINOS', 'TITÂNIO', 'EXPANSÃO', 'DESCOBERTA', 'TRANSFORMAÇÃO'
+    ]
+  },
+  {
+    id: 'pulsares',
+    title: 'Estrelas de Nêutrons & Pulsares',
+    description: 'Os relógios mais precisos do universo e magnetars',
+    iconName: 'Zap',
+    words: [
+      'PULSAR', 'ESTRELA DE NÊUTRONS', 'MAGNETAR', 'ROTAÇÃO', 'FEIXE',
+      'RÁDIO', 'DENSIDADE', 'CAMPO MAGNÉTICO', 'RELÓGIO CÓSMICO', 'EMISSÃO',
+      'GRAVIDADE EXTREMA', 'ENERGIA', 'COLAPSO', 'FAROL', 'QUÂNTICO',
+      'MILISSEGUNDO', 'PRESSÃO', 'NÊUTRON', 'PERÍODO', 'SINAL'
+    ]
+  },
+  {
+    id: 'buracos_negros',
+    title: 'Buracos Negros & Singularidade',
+    description: 'Onde o tempo desacelera e a gravidade é absoluta',
+    iconName: 'Moon',
+    words: [
+      'BURACO NEGRO', 'HORIZONTE DE EVENTOS', 'SINGULARIDADE', 'ACREÇÃO', 'RELATIVIDADE',
+      'EINSTEIN', 'HAWKING', 'RADIAÇÃO', 'GRAVIDADE', 'ESPAÇO-TEMPO',
+      'DISCO', 'JATOS', 'SPAGHETTIFICAÇÃO', 'FÓTON', 'SUPERMASSIVO',
+      'SAGITÁRIO', 'CURVATURA', 'LUZ PRESA', 'EQUAÇÃO', 'MISTÉRIO'
+    ]
+  },
+  {
+    id: 'via_lactea',
+    title: 'O Centro da Via Láctea',
+    description: 'Braços espirais e o coração da nossa galáxia',
+    iconName: 'Sparkles',
+    words: [
+      'VIA LÁCTEA', 'SAGITÁRIO A', 'BRAÇO DE ÓRION', 'PERSEU', 'CENTAURO',
+      'BULBO', 'DISCO GALÁCTICO', 'HALO', 'ESTRELAS', 'BILHÕES',
+      'ROTAÇÃO', 'CENTRO', 'POEIRA CÓSMICA', 'INFRAVERMELHO', 'BURACO NEGRO',
+      'GALÁXIA ESPIRAL', 'NOSSO LAR', 'CÉU ESTRELADO', 'ASTRONOMIA', 'UNIVERSO'
+    ]
+  },
+  {
+    id: 'andromeda',
+    title: 'Galáxia de Andrômeda',
+    description: 'Nossa vizinha cósmica majestosa com 1 trilhão de estrelas',
+    iconName: 'Sparkles',
+    words: [
+      'ANDRÔMEDA', 'MESSIER 31', 'GALÁXIA VIZINHA', 'ESPIRAL', 'NÚCLEO DUPLO',
+      'TRILHÃO', 'COLISÃO FUTURA', 'HALO', 'SATÉLITES', 'ASTRONOMIA',
+      'AQUISIÇÃO', 'BRAÇOS', 'SUPERNOVAS', 'AGLOMERADOS', 'DISTÂNCIA',
+      'ANOS-LUZ', 'VELOCIDADE', 'FUSÃO', 'CÉU PROFUNDO', 'ESPACIAL'
+    ]
+  },
+  {
+    id: 'exoplanetas',
+    title: 'Exoplanetas Habitáveis',
+    description: 'Mundos que orbitam outras estrelas em busca de vida',
+    iconName: 'Compass',
+    words: [
+      'EXOPLANETA', 'ZONA HABITÁVEL', 'KEPLER', 'JAMES WEBB', 'TRAPPIST',
+      'PROXIMA B', 'SUPER-TERRA', 'TRANSITO', 'ATMOSFERA', 'ÁGUA LÍQUIDA',
+      'ESTRELA-MÃE', 'ANÃ VERMELHA', 'ÓRBITA', 'BIOSFERA', 'ESPECTROSCOPIA',
+      'GRAVIDADE', 'DESCOBERTA', 'OCEANO', 'VIDA', 'FRONTEIRA'
+    ]
+  },
+  {
+    id: 'quasares',
+    title: 'Quasares & Faróis do Infinito',
+    description: 'Os núcleos galácticos mais energéticos e brilhantes do cosmos',
+    iconName: 'Zap',
+    words: [
+      'QUASAR', 'NÚCLEO ATIVO', 'JATOS DE PLASMA', 'RELATIVÍSTICO', 'ENERGIA',
+      'BURACO NEGRO', 'ALIMENTAÇÃO', 'RADIAÇÃO', 'LUMINOSIDADE', 'DISTANTE',
+      'UNIVERSO JOVEM', 'ESPECTRO', 'GASES', 'VELOCIDADE DA LUZ', 'ASTRONOMIA',
+      'BRILHO CELESTE', 'COSMOLOGIA', 'FAROL CÓSMICO', 'POTÊNCIA', 'MAGNITUDE'
+    ]
+  },
+  {
+    id: 'universo_infinito',
+    title: 'O Horizonte Infinito das Palavras',
+    description: 'O ápice da jornada cósmica onde todo o conhecimento se une',
+    iconName: 'Trophy',
+    words: [
+      'UNIVERSO', 'COSMOS', 'INFINITO', 'GALÁXIA', 'ESTRELA',
+      'SABEDORIA', 'CONHECIMENTO', 'HORIZONTE', 'BIG BANG', 'ENERGIA',
+      'MATÉRIA', 'LUZ', 'HARMONIA', 'ASTRONOMIA', 'DESCOBERTA',
+      'GRAVIDADE', 'ESPAÇO-TEMPO', 'DIMENSÃO', 'PALAVRAS', 'VITÓRIA'
+    ]
+  },
+  {
     id: 'frutas',
     title: 'Frutas Tropicais',
     description: 'Sabores tropicais e frutas nativas do Brasil',

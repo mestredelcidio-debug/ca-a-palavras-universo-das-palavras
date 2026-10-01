@@ -1,13 +1,13 @@
-import florestaImg from '../assets/images/nature_floresta_bg_1790721196607.jpg';
-import marImg from '../assets/images/nature_mar_bg_1790721208047.jpg';
-import rioImg from '../assets/images/nature_rio_bg_1790721219055.jpg';
-import cachoeiraImg from '../assets/images/nature_cachoeira_bg_1790721230415.jpg';
-import beachImg from '../assets/images/beach_paradise_bg_1790595434475.jpg';
+import nebulaImg from '../assets/images/cosmos_nebula_bg_1790823307384.jpg';
+import galaxyImg from '../assets/images/cosmos_galaxy_bg_1790823320260.jpg';
+import planetImg from '../assets/images/cosmos_planet_bg_1790823332545.jpg';
+import supernovaImg from '../assets/images/cosmos_supernova_bg_1790823345703.jpg';
+import auroraImg from '../assets/images/cosmos_aurora_bg_1790823358918.jpg';
 
 export interface NatureBackground {
   id: string;
   name: string;
-  category: 'floresta' | 'mar' | 'rio' | 'cachoeira' | 'classico';
+  category: 'floresta' | 'mar' | 'rio' | 'cachoeira' | 'classico' | 'nebulosa' | 'galaxia' | 'planeta' | 'supernova' | 'aurora';
   description: string;
   image: string;
   requiredStars: number;
@@ -17,54 +17,54 @@ export interface NatureBackground {
 
 export const NATURE_BACKGROUNDS: NatureBackground[] = [
   {
-    id: 'floresta',
-    name: 'Floresta Tropical Exuberante',
-    category: 'floresta',
-    description: 'Raios dourados de sol atravessando a copa verdejante e folhas de palmeiras nativas.',
-    image: florestaImg,
+    id: 'floresta', // mapped to Nebulosa for seamless persistence
+    name: 'Nebulosa Estelar Mística',
+    category: 'nebulosa' as any,
+    description: 'Poeira cósmica luminosa, gases violeta e magenta com constelações cintilantes.',
+    image: nebulaImg,
     requiredStars: 0,
     badge: '🎁 GRÁTIS',
-    tag: 'Mata Tropical'
+    tag: 'Nebulosa Cósmica'
   },
   {
-    id: 'mar',
-    name: 'Mar Turquesa & Praia Paradisíaca',
-    category: 'mar',
-    description: 'Águas cristalinas em tons azul-turquesa e areias douradas do litoral brasileiro.',
-    image: marImg,
+    id: 'mar', // mapped to Galáxia for seamless persistence
+    name: 'Galáxia Espiral dos Sonhos',
+    category: 'galaxia' as any,
+    description: 'Braços espirais celestes e núcleo brilhante de milhões de estrelas douradas.',
+    image: galaxyImg,
     requiredStars: 0,
     badge: '🎁 GRÁTIS',
-    tag: 'Oceano & Mar'
+    tag: 'Via Láctea'
   },
   {
-    id: 'rio',
-    name: 'Rio Amazônico & Pantanal',
-    category: 'rio',
-    description: 'Águas esmeraldas serpenteando a floresta densa com reflexos do amanhecer.',
-    image: rioImg,
+    id: 'rio', // mapped to Planeta for seamless persistence
+    name: 'Planeta dos Anéis & Exomundo',
+    category: 'planeta' as any,
+    description: 'Um exoplaneta majestoso com anéis de poeira estelar flutuando no cosmos profundo.',
+    image: planetImg,
     requiredStars: 30,
     badge: '⭐ 30 ESTRELAS',
-    tag: 'Bacia Amazônica'
+    tag: 'Sistema Planetário'
   },
   {
-    id: 'cachoeira',
-    name: 'Cachoeira & Lagoa Esmeralda',
-    category: 'cachoeira',
-    description: 'Quedas d’água majestosas desaguando em uma lagoa cristalina cercada de flores tropicais.',
-    image: cachoeiraImg,
+    id: 'cachoeira', // mapped to Supernova for seamless persistence
+    name: 'Supernova & Clarão Cósmico',
+    category: 'supernova' as any,
+    description: 'O nascimento radiante de estrelas em filamentos de luz dourada e azul celeste.',
+    image: supernovaImg,
     requiredStars: 45,
     badge: '⭐ 45 ESTRELAS',
-    tag: 'Santuário Natural'
+    tag: 'Supernova'
   },
   {
-    id: 'classico',
-    name: 'Praia Tropical (Modo Clássico)',
-    category: 'classico',
-    description: 'O visual clássico e original do antigo modo de caça-palavras com coqueiros e brisa.',
-    image: beachImg,
+    id: 'classico', // mapped to Aurora Espacial for seamless persistence
+    name: 'Aurora Boreal Espacial',
+    category: 'aurora' as any,
+    description: 'Ondas mágicas de luz esmeralda e violeta dançando sob a luz das galáxias distantes.',
+    image: auroraImg,
     requiredStars: 0,
     badge: '🎁 GRÁTIS',
-    tag: 'Modo Clássico'
+    tag: 'Aurora Cósmica'
   }
 ];
 

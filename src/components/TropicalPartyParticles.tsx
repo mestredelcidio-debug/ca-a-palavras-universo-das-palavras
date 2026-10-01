@@ -24,35 +24,35 @@ export const TropicalPartyParticles: React.FC<TropicalPartyParticlesProps> = ({
 }) => {
   useEffect(() => {
     if (activeWord) {
-      // Trigger canvas-confetti with Brazilian tropical carnival palette
-      const tropicalColors = ['#22c55e', '#eab308', '#ec4899', '#06b6d4', '#f97316', '#a855f7', '#ffffff'];
+      // Trigger canvas-confetti with Cosmic Galaxy palette (starlight gold, nebula cyan, cosmic violet, electric magenta, diamond white)
+      const cosmicColors = ['#8b5cf6', '#ec4899', '#06b6d4', '#eab308', '#38bdf8', '#c084fc', '#ffffff', '#fbbf24'];
 
       confetti({
-        particleCount: 50,
-        spread: 75,
+        particleCount: 55,
+        spread: 80,
         origin: { y: 0.55 },
-        colors: tropicalColors,
+        colors: cosmicColors,
         shapes: ['circle', 'square'],
         ticks: 200,
-        gravity: 1.1,
-        scalar: 1.1
+        gravity: 1.0,
+        scalar: 1.15
       });
 
-      // Side cannons for extra tropical party feel
+      // Side stellar bursts for cosmic galaxy feel
       setTimeout(() => {
         confetti({
-          particleCount: 30,
+          particleCount: 35,
           angle: 60,
-          spread: 55,
+          spread: 60,
           origin: { x: 0.1, y: 0.65 },
-          colors: tropicalColors
+          colors: cosmicColors
         });
         confetti({
-          particleCount: 30,
+          particleCount: 35,
           angle: 120,
-          spread: 55,
+          spread: 60,
           origin: { x: 0.9, y: 0.65 },
-          colors: tropicalColors
+          colors: cosmicColors
         });
       }, 120);
     }

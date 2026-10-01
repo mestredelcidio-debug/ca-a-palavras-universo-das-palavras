@@ -32,18 +32,18 @@ export const BackgroundSelectorModal: React.FC<BackgroundSelectorModalProps> = (
     <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center z-50 p-3 sm:p-4 animate-fadeIn select-none">
       <div className="bg-slate-900 border-2 border-emerald-500/70 rounded-3xl w-full max-w-md max-h-[92vh] flex flex-col shadow-2xl overflow-hidden text-white">
         {/* Header */}
-        <div className="p-4 bg-gradient-to-r from-slate-900 via-emerald-950/80 to-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
+        <div className="p-4 bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 flex items-center justify-center shadow-lg font-black">
-              <Trees className="w-5 h-5 stroke-[2.5]" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-center shadow-lg font-black">
+              <Sparkles className="w-5 h-5 stroke-[2.5]" />
             </div>
             <div>
               <h2 className="font-display font-black text-base uppercase tracking-wide text-white flex items-center gap-1.5">
-                Fundos de Natureza (5)
+                Cenários do Universo (5)
                 <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400/40" />
               </h2>
-              <p className="text-[11px] text-emerald-200/90 font-medium">
-                Aplicado a todos os capítulos e telas do jogo
+              <p className="text-[11px] text-indigo-200/90 font-medium">
+                Cenários cósmicos aplicados a todos os mundos e fases
               </p>
             </div>
           </div>
