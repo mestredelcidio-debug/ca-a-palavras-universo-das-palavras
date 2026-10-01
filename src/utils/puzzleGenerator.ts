@@ -1,4 +1,6 @@
 import { CATEGORIES, getCategoryById } from '../data/categories';
+import { getWordsForLevel } from '../data/universeWordBank';
+import { GAME_MODES } from '../data/gameModes';
 import { CellPos, Difficulty, PlacedWord, PuzzleData } from '../types/game';
 import { getRandomFillerLetter, normalizePtBr, getWordLetters, normalizePtBrChar } from './text';
 
@@ -68,40 +70,55 @@ export function getDifficultyConfig(_difficulty?: Difficulty): {
 /**
  * Attempts to place words on the grid preserving Portuguese accents.
  * Retries if placement density is too high or words fail.
- * Always maintains exactly 6 words to be found.
+ * Always maintains exactly 6 fresh, non-repeating words per level.
  */
 export function generatePuzzle(
   categoryId: string,
   difficulty: Difficulty = 'medium',
-  seed: number = Math.floor(Math.random() * 1000000)
+  seed: number = Math.floor(Math.random() * 1000000),
+  levelNumber?: number,
+  specialModeId?: number
 ): PuzzleData {
   const category = getCategoryById(categoryId);
   const config = getDifficultyConfig(difficulty);
   const size = config.size;
 
+  // Extrai o nível real para selecionar palavras 100% exclusivas
+  const effectiveLevel =
+    levelNumber ?? Math.max(1, Math.floor((seed - 1000) / 47) || Math.floor((seed % 900) + 1));
+
+  const modeDef = specialModeId ? GAME_MODES.find(m => m.id === specialModeId) : null;
+  const displayTitle = modeDef ? modeDef.name : category.title;
+
+  // Obtém 6 palavras exclusivas do banco massivo sem repetições
+  const freshWords = getWordsForLevel(categoryId, effectiveLevel, 6, specialModeId);
+
   let currentSeed = seed;
   let attempts = 0;
-  const maxGeneratorAttempts = 20;
+  const maxGeneratorAttempts = 35;
 
   while (attempts < maxGeneratorAttempts) {
     attempts++;
     const rng = createSeededRandom(currentSeed);
 
-    // Shuffle and pick words from category
-    const shuffledPool = [...category.words].sort(() => rng() - 0.5);
-    // Filter words that fit within grid bounds
-    const eligibleWords = shuffledPool.filter(w => {
+    // Se tentativas iniciais falharem por colisão geométrica, busca variação do banco
+    let candidateWords = [...freshWords];
+    if (attempts > 12) {
+      candidateWords = getWordsForLevel(categoryId, effectiveLevel + attempts * 3, 6, specialModeId);
+    }
+
+    // Filtra palavras que cabem dentro do grid de 9x9 (tamanho 3 a 8 letras)
+    const eligibleWords = candidateWords.filter(w => {
       const norm = normalizePtBr(w);
       return norm.length >= 3 && norm.length <= size;
     });
 
-    // Strictly exactly 6 words as requested by the user
     const targetWords = eligibleWords.slice(0, 6);
-    
-    // Sort words by length descending for easier placement
+
+    // Ordena do maior para o menor para facilitar encaixe
     targetWords.sort((a, b) => normalizePtBr(b).length - normalizePtBr(a).length);
 
-    // Initialize empty grid
+    // Grid vazio 9x9
     const grid: string[][] = Array.from({ length: size }, () => Array(size).fill(''));
     const placedWords: PlacedWord[] = [];
     let allPlaced = true;
@@ -126,8 +143,8 @@ export function generatePuzzle(
       }
     }
 
-    if (allPlaced && placedWords.length >= Math.min(4, config.wordCount)) {
-      // Fill empty spots with realistic Portuguese filler letters
+    if (allPlaced && placedWords.length === 6) {
+      // Preenche os espaços vazios com letras naturais do português
       for (let r = 0; r < size; r++) {
         for (let c = 0; c < size; c++) {
           if (!grid[r][c]) {
@@ -136,7 +153,7 @@ export function generatePuzzle(
         }
       }
 
-      // Verify that all target words are indeed present along their declared paths
+      // Verificação de integridade das palavras no tabuleiro
       let verified = true;
       for (const pw of placedWords) {
         let spelled = '';
@@ -151,10 +168,10 @@ export function generatePuzzle(
 
       if (verified) {
         return {
-          id: `puzzle_${categoryId}_${difficulty}_${seed}`,
-          name: `${category.title} #${seed % 1000 + 1}`,
-          category: category.id,
-          categoryTitle: category.title,
+          id: `puzzle_${specialModeId ? `mode_${specialModeId}` : categoryId}_${difficulty}_${effectiveLevel}_${seed}`,
+          name: `${displayTitle} #${effectiveLevel}`,
+          category: specialModeId ? `mode_${specialModeId}` : category.id,
+          categoryTitle: displayTitle,
           difficulty,
           size,
           grid,
@@ -164,12 +181,12 @@ export function generatePuzzle(
       }
     }
 
-    // Try next seed
+    // Próxima semente para novo layout
     currentSeed += 9973;
   }
 
-  // Fallback safety: place standard words horizontally if extreme density failed
-  return generateSimpleFallbackPuzzle(category, difficulty, seed);
+  // Fallback seguro usando as próprias palavras exclusivas da fase
+  return generateSimpleFallbackPuzzle(category, difficulty, seed, freshWords, effectiveLevel, displayTitle);
 }
 
 function tryPlaceWord(
@@ -180,14 +197,14 @@ function tryPlaceWord(
   rng: () => number
 ): { path: CellPos[] } | null {
   const len = wordLetters.length;
-  const maxTries = 120;
+  const maxTries = 150;
   const shuffledDirs = [...directions].sort(() => rng() - 0.5);
 
   for (let t = 0; t < maxTries; t++) {
     const dir = shuffledDirs[Math.floor(rng() * shuffledDirs.length)];
     const [dRow, dCol] = dir;
 
-    // Calculate valid starting bounds
+    // Calcula os limites de início no grid 9x9
     const minRow = dRow < 0 ? len - 1 : 0;
     const maxRow = dRow > 0 ? size - len : size - 1;
     const minCol = dCol < 0 ? len - 1 : 0;
@@ -222,11 +239,10 @@ function tryPlaceWord(
     }
 
     if (canPlace) {
-      // Commit placement to grid keeping accented characters
       for (let k = 0; k < len; k++) {
-        const { row, col } = path[k];
-        if (!grid[row][col]) {
-          grid[row][col] = wordLetters[k];
+        const pt = path[k];
+        if (grid[pt.row][pt.col] === '') {
+          grid[pt.row][pt.col] = wordLetters[k];
         }
       }
       return { path };
@@ -239,7 +255,10 @@ function tryPlaceWord(
 function generateSimpleFallbackPuzzle(
   category: ReturnType<typeof getCategoryById>,
   difficulty: Difficulty,
-  seed: number
+  seed: number,
+  wordsPool: string[],
+  levelNumber: number,
+  customTitle?: string
 ): PuzzleData {
   const config = getDifficultyConfig(difficulty);
   const size = config.size;
@@ -247,10 +266,10 @@ function generateSimpleFallbackPuzzle(
   const grid: string[][] = Array.from({ length: size }, () => Array(size).fill(''));
   const placedWords: PlacedWord[] = [];
 
-  const words = category.words
+  const words = wordsPool
     .map(w => ({ orig: w, norm: normalizePtBr(w), letters: getWordLetters(w) }))
     .filter(w => w.norm.length <= size)
-    .slice(0, Math.min(size, config.wordCount));
+    .slice(0, 6);
 
   words.forEach((w, rowIdx) => {
     if (rowIdx < size) {
@@ -279,11 +298,12 @@ function generateSimpleFallbackPuzzle(
     }
   }
 
+  const title = customTitle || category.title;
   return {
-    id: `puzzle_fallback_${category.id}_${seed}`,
-    name: `${category.title} #${seed % 1000 + 1}`,
+    id: `puzzle_fallback_${category.id}_${levelNumber}_${seed}`,
+    name: `${title} #${levelNumber}`,
     category: category.id,
-    categoryTitle: category.title,
+    categoryTitle: title,
     difficulty,
     size,
     grid,

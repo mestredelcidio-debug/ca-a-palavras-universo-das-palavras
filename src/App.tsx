@@ -79,9 +79,10 @@ export default function App() {
 
   // Active puzzle state
   const [puzzle, setPuzzle] = useState<PuzzleData>(() => {
-    const chap = getChapterForLevel(profile.currentLevel || 1);
-    const seed = 1000 + (profile.currentLevel || 1) * 37;
-    return generatePuzzle(chap.themeCategory, 'medium', seed);
+    const lvl = profile.currentLevel || 1;
+    const chap = getChapterForLevel(lvl);
+    const seed = 1000 + lvl * 47;
+    return generatePuzzle(chap.themeCategory, 'medium', seed, lvl);
   });
 
   // Hints used in current game
@@ -168,7 +169,7 @@ export default function App() {
       const chap = getChapterForLevel(lvl);
       const seed = 1000 + lvl * 47;
 
-      const newPuzzle = generatePuzzle(chap.themeCategory, diff, seed);
+      const newPuzzle = generatePuzzle(chap.themeCategory, diff, seed, lvl);
 
       setActiveGameMode(null); // Standard Campaign mode without constraints
       setActiveLevel(lvl);
@@ -189,7 +190,7 @@ export default function App() {
       const diff: Difficulty = mode.id >= 10 ? 'expert' : mode.id >= 5 ? 'hard' : 'medium';
       const chap = getChapterForLevel(activeSelectedLevel);
       const seed = 3000 + mode.id * 100 + activeSelectedLevel * 31;
-      const newPuzzle = generatePuzzle(chap.themeCategory, diff, seed);
+      const newPuzzle = generatePuzzle(chap.themeCategory, diff, seed, activeSelectedLevel, mode.id);
 
       setActiveLevel(activeSelectedLevel);
       setCurrentChapter(chap);

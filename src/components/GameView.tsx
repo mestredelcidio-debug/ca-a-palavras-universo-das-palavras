@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CoinPill } from './CoinPill';
-import { CellPos, Difficulty, PuzzleData } from '../types/game';
+import { CellPos, Difficulty, PlacedWord, PuzzleData } from '../types/game';
 import { normalizePtBr } from '../utils/text';
 import { GameModeDefinition, ConsumableItem } from '../data/gameModes';
 import { IN_GAME_POWERUPS, InGamePowerup } from '../data/inGamePowerups';
@@ -294,68 +294,53 @@ export const GameView: React.FC<GameViewProps> = ({
     }, 1800);
   };
 
-  // Calculate straight line path in any direction
+  // Calculate straight line path in any of the 8 directions with wobble protection
   const calculateLinePath = useCallback((start: CellPos, end: CellPos): CellPos[] => {
     const dr = end.row - start.row;
     const dc = end.col - start.col;
-    const absR = Math.abs(dr);
-    const absC = Math.abs(dc);
+
+    if (dr === 0 && dc === 0) {
+      return [start];
+    }
+
+    // Determine the closest of the 8 directions using angle (45-degree octants)
+    const angle = Math.atan2(dr, dc);
+    const octant = Math.round((8 * angle) / (2 * Math.PI) + 8) % 8;
+    const octantDirs: [number, number][] = [
+      [0, 1],   // 0: Right
+      [1, 1],   // 1: Down-Right
+      [1, 0],   // 2: Down
+      [1, -1],  // 3: Down-Left
+      [0, -1],  // 4: Left
+      [-1, -1], // 5: Up-Left
+      [-1, 0],  // 6: Up
+      [-1, 1]   // 7: Up-Right
+    ];
+    const [stepR, stepC] = octantDirs[octant];
+
+    // Determine number of steps along this direction
+    let steps = 0;
+    if (stepR !== 0 && stepC !== 0) {
+      steps = Math.max(Math.abs(dr), Math.abs(dc));
+    } else if (stepR !== 0) {
+      steps = Math.abs(dr);
+    } else {
+      steps = Math.abs(dc);
+    }
 
     const path: CellPos[] = [];
-
-    // Horizontal
-    if (absR === 0) {
-      const step = dc >= 0 ? 1 : -1;
-      for (let c = start.col; c !== end.col + step; c += step) {
-        path.push({ row: start.row, col: c });
-      }
-    }
-    // Vertical
-    else if (absC === 0) {
-      const step = dr >= 0 ? 1 : -1;
-      for (let r = start.row; r !== end.row + step; r += step) {
-        path.push({ row: r, col: start.col });
-      }
-    }
-    // Diagonal
-    else if (absR === absC) {
-      const stepR = dr >= 0 ? 1 : -1;
-      const stepC = dc >= 0 ? 1 : -1;
-      let r = start.row;
-      let c = start.col;
-      for (let i = 0; i <= absR; i++) {
+    for (let i = 0; i <= steps; i++) {
+      const r = start.row + i * stepR;
+      const c = start.col + i * stepC;
+      if (r >= 0 && r < gridSize && c >= 0 && c < gridSize) {
         path.push({ row: r, col: c });
-        r += stepR;
-        c += stepC;
-      }
-    } else {
-      // Snap to closest straight direction
-      if (absR > absC * 2) {
-        const step = dr >= 0 ? 1 : -1;
-        for (let r = start.row; r !== end.row + step; r += step) {
-          path.push({ row: r, col: start.col });
-        }
-      } else if (absC > absR * 2) {
-        const step = dc >= 0 ? 1 : -1;
-        for (let c = start.col; c !== end.col + step; c += step) {
-          path.push({ row: start.row, col: c });
-        }
       } else {
-        const stepR = dr >= 0 ? 1 : -1;
-        const stepC = dc >= 0 ? 1 : -1;
-        const count = Math.min(absR, absC);
-        let r = start.row;
-        let c = start.col;
-        for (let i = 0; i <= count; i++) {
-          path.push({ row: r, col: c });
-          r += stepR;
-          c += stepC;
-        }
+        break;
       }
     }
 
-    return path;
-  }, []);
+    return path.length > 0 ? path : [start];
+  }, [gridSize]);
 
   const getCellFromCoordinates = (clientX: number, clientY: number): CellPos | null => {
     if (!gridRef.current) return null;
@@ -417,9 +402,89 @@ export const GameView: React.FC<GameViewProps> = ({
 
     let spelled = '';
     path.forEach(p => {
-      spelled += gridData[p.row][p.col];
+      spelled += gridData[p.row][p.col] || '';
     });
-    setCurrentWordSpelled(spelled);
+    const revSpelled = spelled.split('').reverse().join('');
+    const normRev = normalizePtBr(revSpelled);
+
+    // Se a palavra invertida bater com uma palavra da fase, mostra a palavra correta para feedback imediato
+    const reverseMatch = puzzle.words.find(
+      w => !foundWords.has(w.cleanDisplay) && w.normalized === normRev
+    );
+    if (reverseMatch) {
+      setCurrentWordSpelled(reverseMatch.cleanDisplay);
+    } else {
+      setCurrentWordSpelled(spelled);
+    }
+  };
+
+  // Localiza correspondência de palavra garantindo que funcione tanto de frente para trás quanto de trás para frente
+  const findMatchingWord = (path: CellPos[]): PlacedWord | null => {
+    if (path.length < 2) return null;
+
+    let forwardStr = '';
+    path.forEach(p => {
+      forwardStr += gridData[p.row][p.col] || '';
+    });
+    const reversedStr = forwardStr.split('').reverse().join('');
+
+    const normalizedForward = normalizePtBr(forwardStr);
+    const normalizedReversed = normalizePtBr(reversedStr);
+
+    const start = path[0];
+    const end = path[path.length - 1];
+
+    for (const w of puzzle.words) {
+      if (foundWords.has(w.cleanDisplay)) continue;
+
+      const norm = w.normalized;
+      const wPath = w.path;
+      if (wPath.length === 0) continue;
+
+      const wFirst = wPath[0];
+      const wLast = wPath[wPath.length - 1];
+
+      // Verificação 1: Coordenadas exatas para frente
+      const pathMatchesForward =
+        path.length === wPath.length &&
+        path.every((p, i) => p.row === wPath[i].row && p.col === wPath[i].col);
+
+      // Verificação 2: Coordenadas exatas para trás
+      const pathMatchesReverse =
+        path.length === wPath.length &&
+        path.every((p, i) => p.row === wPath[wPath.length - 1 - i].row && p.col === wPath[wPath.length - 1 - i].col);
+
+      if (pathMatchesForward || pathMatchesReverse) {
+        return w;
+      }
+
+      // Verificação 3: Letras coincidem para frente OU para trás
+      const lettersMatch = (norm === normalizedForward || norm === normalizedReversed);
+
+      // Extremidades coincidem em qualquer sentido
+      const endpointsMatch =
+        (start.row === wFirst.row && start.col === wFirst.col && end.row === wLast.row && end.col === wLast.col) ||
+        (start.row === wLast.row && start.col === wLast.col && end.row === wFirst.row && end.col === wFirst.col);
+
+      if (lettersMatch && (endpointsMatch || path.length === wPath.length)) {
+        return w;
+      }
+
+      // Verificação 4: Tolerância de 1 célula a mais no deslize do dedo
+      if (path.length === wPath.length + 1) {
+        const trimmed = path.slice(0, -1);
+        let trimmedStr = '';
+        trimmed.forEach(p => { trimmedStr += gridData[p.row][p.col] || ''; });
+        const normTrimmedFwd = normalizePtBr(trimmedStr);
+        const normTrimmedRev = normalizePtBr(trimmedStr.split('').reverse().join(''));
+
+        if (normTrimmedFwd === norm || normTrimmedRev === norm) {
+          return w;
+        }
+      }
+    }
+
+    return null;
   };
 
   const handlePointerUp = () => {
@@ -427,19 +492,7 @@ export const GameView: React.FC<GameViewProps> = ({
     setIsSelecting(false);
 
     if (selectedPath.length > 0) {
-      let forwardStr = '';
-      selectedPath.forEach(p => {
-        forwardStr += gridData[p.row][p.col];
-      });
-      const reversedStr = forwardStr.split('').reverse().join('');
-
-      const normalizedForward = normalizePtBr(forwardStr);
-      const normalizedReversed = normalizePtBr(reversedStr);
-
-      const matchedWord = puzzle.words.find(w => {
-        const norm = w.normalized;
-        return !foundWords.has(w.cleanDisplay) && (norm === normalizedForward || norm === normalizedReversed);
-      });
+      const matchedWord = findMatchingWord(selectedPath);
 
       if (matchedWord) {
         // Mode 13: Conexão em Cadeia validation
@@ -460,7 +513,7 @@ export const GameView: React.FC<GameViewProps> = ({
         setFoundWords(updatedSet);
 
         const color = highlightColors[foundPaths.length % highlightColors.length];
-        setFoundPaths(prev => [...prev, { word: matchedWord.cleanDisplay, path: selectedPath, color }]);
+        setFoundPaths(prev => [...prev, { word: matchedWord.cleanDisplay, path: matchedWord.path, color }]);
 
         playWordFoundChime(soundEnabled, 0.7);
 

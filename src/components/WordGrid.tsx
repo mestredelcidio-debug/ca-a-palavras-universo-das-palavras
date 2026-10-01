@@ -32,7 +32,7 @@ export const WordGrid: React.FC<WordGridProps> = ({
 
   const size = puzzle.size;
 
-  // Compute active path between start and current cell strictly snapped to 8 directions
+  // Compute active path between start and current cell strictly snapped to 8 directions with wobble protection
   const calculatePath = useCallback((start: CellPos, curr: CellPos): CellPos[] => {
     const dr = curr.row - start.row;
     const dc = curr.col - start.col;
@@ -41,28 +41,27 @@ export const WordGrid: React.FC<WordGridProps> = ({
       return [start];
     }
 
-    const absDr = Math.abs(dr);
-    const absDc = Math.abs(dc);
+    const angle = Math.atan2(dr, dc);
+    const octant = Math.round((8 * angle) / (2 * Math.PI) + 8) % 8;
+    const octantDirs: [number, number][] = [
+      [0, 1],   // 0: Right
+      [1, 1],   // 1: Down-Right
+      [1, 0],   // 2: Down
+      [1, -1],  // 3: Down-Left
+      [0, -1],  // 4: Left
+      [-1, -1], // 5: Up-Left
+      [-1, 0],  // 6: Up
+      [-1, 1]   // 7: Up-Right
+    ];
+    const [stepR, stepC] = octantDirs[octant];
 
-    let stepR = 0;
-    let stepC = 0;
     let steps = 0;
-
-    if (absDr < 0.45 * absDc) {
-      // Horizontal
-      stepR = 0;
-      stepC = dc > 0 ? 1 : -1;
-      steps = absDc;
-    } else if (absDc < 0.45 * absDr) {
-      // Vertical
-      stepR = dr > 0 ? 1 : -1;
-      stepC = 0;
-      steps = absDr;
+    if (stepR !== 0 && stepC !== 0) {
+      steps = Math.max(Math.abs(dr), Math.abs(dc));
+    } else if (stepR !== 0) {
+      steps = Math.abs(dr);
     } else {
-      // Diagonal (45 degrees)
-      stepR = dr > 0 ? 1 : -1;
-      stepC = dc > 0 ? 1 : -1;
-      steps = Math.min(absDr, absDc);
+      steps = Math.abs(dc);
     }
 
     const path: CellPos[] = [];
@@ -71,9 +70,11 @@ export const WordGrid: React.FC<WordGridProps> = ({
       const c = start.col + i * stepC;
       if (r >= 0 && r < size && c >= 0 && c < size) {
         path.push({ row: r, col: c });
+      } else {
+        break;
       }
     }
-    return path;
+    return path.length > 0 ? path : [start];
   }, [size]);
 
   // Translate client coordinates into grid row & col
