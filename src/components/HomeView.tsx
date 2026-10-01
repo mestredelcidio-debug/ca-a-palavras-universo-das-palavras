@@ -31,7 +31,9 @@ import {
   Shuffle,
   Link,
   Moon,
-  Trophy
+  Trophy,
+  User,
+  LogOut
 } from 'lucide-react';
 import { CoinPill } from './CoinPill';
 import { Difficulty } from '../types/game';

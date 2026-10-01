@@ -7,8 +7,26 @@ export function normalizePtBr(text: string): string {
   return text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '') // remove diacritics
-    .replace(/Ç/gi, 'C')
+    .replace(/[Çç]/gi, 'C')
     .replace(/[^a-zA-Z]/g, '')
+    .toUpperCase();
+}
+
+// Extracts valid letters while preserving Portuguese accents and cedillas
+export function getWordLetters(text: string): string[] {
+  return text
+    .split('')
+    .filter(char => /[a-zA-ZáéíóúâêôãõçÁÉÍÓÚÂÊÔÃÕÇ]/u.test(char))
+    .map(c => c.toUpperCase());
+}
+
+// Normalizes a single character for overlap/comparison checking
+export function normalizePtBrChar(char: string): string {
+  if (!char) return '';
+  return char
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[Çç]/g, 'C')
     .toUpperCase();
 }
 

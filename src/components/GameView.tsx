@@ -37,7 +37,7 @@ import { normalizePtBr } from '../utils/text';
 import { GameModeDefinition, ConsumableItem } from '../data/gameModes';
 import { IN_GAME_POWERUPS, InGamePowerup } from '../data/inGamePowerups';
 import { TropicalPartyParticles, TropicalParticle } from './TropicalPartyParticles';
-import { playWordFoundChime, playHintSparkle } from '../utils/audio';
+import { playWordFoundChime, playHintSparkle, playLetterTick } from '../utils/audio';
 
 interface GameViewProps {
   levelNumber: number;
@@ -410,6 +410,9 @@ export const GameView: React.FC<GameViewProps> = ({
     if (!cell) return;
 
     const path = calculateLinePath(startCell, cell);
+    if (path.length !== selectedPath.length) {
+      playLetterTick(soundEnabled, 0.35);
+    }
     setSelectedPath(path);
 
     let spelled = '';
@@ -655,7 +658,7 @@ export const GameView: React.FC<GameViewProps> = ({
 
   return (
     <div
-      className={`relative w-full h-full min-h-screen flex flex-col justify-between overflow-hidden select-none pb-2 transition-colors ${
+      className={`relative w-full h-full min-h-screen flex flex-col justify-between overflow-hidden select-none pb-6 sm:pb-8 transition-colors ${
         isDamageFlashing ? 'bg-red-950/80' : ''
       }`}
     >
@@ -1020,7 +1023,7 @@ export const GameView: React.FC<GameViewProps> = ({
       {/* ========================================================================= */}
       {/* 5. ARSENAL DE FACILIDADES & ITENS DE COMPRA (R$ 2,50 a R$ 4,90) */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-[370px] mx-auto px-2 z-30 flex flex-col gap-1.5 mt-auto">
+      <div className="w-full max-w-[370px] mx-auto px-2 z-30 flex flex-col gap-1.5 mt-auto mb-4 sm:mb-6">
         {/* Status Pills */}
         <div className="flex items-center justify-between text-[10px] text-white/90 font-bold px-1">
           <span className="uppercase tracking-wider text-amber-300">

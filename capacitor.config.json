@@ -1,0 +1,8 @@
+{
+  "appId": "com.mestredelcidio.cacapalavrasbrasil",
+  "appName": "Caça-Palavras Brasil",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

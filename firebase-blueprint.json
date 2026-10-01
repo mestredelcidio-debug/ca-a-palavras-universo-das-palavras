@@ -1,0 +1,33 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile data, game progress, coins, and stats",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "username": { "type": "string", "maxLength": 50, "description": "Display name or username" },
+        "email": { "type": "string", "format": "email", "description": "User email" },
+        "coins": { "type": "number", "description": "In-game coins" },
+        "stars": { "type": "number", "description": "Total stars earned" },
+        "currentLevel": { "type": "number", "description": "Current level in campaign" },
+        "completedLevels": { "type": "object", "description": "Record of completed levels" },
+        "chapterBackgrounds": { "type": "object", "description": "Chapter background selections" },
+        "bgMode": { "type": "string", "description": "Background mode" },
+        "activeNatureBg": { "type": "string", "description": "Active nature background ID" },
+        "lastDailyDate": { "type": "string", "description": "Last daily reward claim date" },
+        "dailyStreak": { "type": "number", "description": "Daily login streak count" },
+        "completedDailyDates": { "type": "array", "description": "Completed daily dates list" },
+        "stats": { "type": "object", "description": "Player stats" },
+        "updatedAt": { "type": "string", "description": "Last update timestamp" }
+      },
+      "required": ["uid", "username", "email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document owned by the user"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { CATEGORIES, getCategoryById } from '../data/categories';
 import { CellPos, Difficulty, PlacedWord, PuzzleData } from '../types/game';
-import { getRandomFillerLetter, normalizePtBr } from './text';
+import { getRandomFillerLetter, normalizePtBr, getWordLetters, normalizePtBrChar } from './text';
 
 // 8 Directions [dRow, dCol]
 export const ALL_DIRECTIONS: [number, number][] = [
@@ -66,7 +66,7 @@ export function getDifficultyConfig(_difficulty?: Difficulty): {
 }
 
 /**
- * Attempts to place words on the grid.
+ * Attempts to place words on the grid preserving Portuguese accents.
  * Retries if placement density is too high or words fail.
  * Always maintains exactly 6 words to be found.
  */
@@ -108,14 +108,14 @@ export function generatePuzzle(
 
     for (let i = 0; i < targetWords.length; i++) {
       const origWord = targetWords[i];
-      const normWord = normalizePtBr(origWord);
-      const placed = tryPlaceWord(grid, normWord, config.directions, size, rng);
+      const wordLetters = getWordLetters(origWord);
+      const placed = tryPlaceWord(grid, wordLetters, config.directions, size, rng);
 
       if (placed) {
         placedWords.push({
           word: origWord,
           cleanDisplay: origWord,
-          normalized: normWord,
+          normalized: normalizePtBr(origWord),
           path: placed.path,
           found: false,
           color: HIGHLIGHT_COLORS[placedWords.length % HIGHLIGHT_COLORS.length]
@@ -141,7 +141,7 @@ export function generatePuzzle(
       for (const pw of placedWords) {
         let spelled = '';
         for (const pt of pw.path) {
-          spelled += grid[pt.row][pt.col];
+          spelled += normalizePtBrChar(grid[pt.row][pt.col]);
         }
         if (spelled !== pw.normalized) {
           verified = false;
@@ -174,13 +174,12 @@ export function generatePuzzle(
 
 function tryPlaceWord(
   grid: string[][],
-  word: string,
+  wordLetters: string[],
   directions: [number, number][],
   size: number,
   rng: () => number
 ): { path: CellPos[] } | null {
-  const len = word.length;
-  // Try up to 120 random placement coordinates and orientations
+  const len = wordLetters.length;
   const maxTries = 120;
   const shuffledDirs = [...directions].sort(() => rng() - 0.5);
 
@@ -212,9 +211,9 @@ function tryPlaceWord(
       }
 
       const existing = grid[r][c];
-      const char = word[k];
+      const char = wordLetters[k];
 
-      if (existing !== '' && existing !== char) {
+      if (existing !== '' && normalizePtBrChar(existing) !== normalizePtBrChar(char)) {
         canPlace = false;
         break;
       }
@@ -223,10 +222,12 @@ function tryPlaceWord(
     }
 
     if (canPlace) {
-      // Commit placement to grid
+      // Commit placement to grid keeping accented characters
       for (let k = 0; k < len; k++) {
         const { row, col } = path[k];
-        grid[row][col] = word[k];
+        if (!grid[row][col]) {
+          grid[row][col] = wordLetters[k];
+        }
       }
       return { path };
     }
@@ -247,7 +248,7 @@ function generateSimpleFallbackPuzzle(
   const placedWords: PlacedWord[] = [];
 
   const words = category.words
-    .map(w => ({ orig: w, norm: normalizePtBr(w) }))
+    .map(w => ({ orig: w, norm: normalizePtBr(w), letters: getWordLetters(w) }))
     .filter(w => w.norm.length <= size)
     .slice(0, Math.min(size, config.wordCount));
 
@@ -255,8 +256,8 @@ function generateSimpleFallbackPuzzle(
     if (rowIdx < size) {
       const colStart = 0;
       const path: CellPos[] = [];
-      for (let i = 0; i < w.norm.length; i++) {
-        grid[rowIdx][colStart + i] = w.norm[i];
+      for (let i = 0; i < w.letters.length; i++) {
+        grid[rowIdx][colStart + i] = w.letters[i];
         path.push({ row: rowIdx, col: colStart + i });
       }
       placedWords.push({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Volume2, Music, FileText, HelpCircle, Globe, Check, ArrowLeft, LogOut } from 'lucide-react';
+import { X, Volume2, Music, FileText, HelpCircle, Globe, Check, ArrowLeft, LogOut, Mail, ExternalLink } from 'lucide-react';
 import { GameSettings } from '../types/game';
 import { SUPPORTED_LANGUAGES, getTranslation } from '../data/translations';
 
@@ -36,8 +36,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   }, [isOpen]);
 
   if (!isOpen) return null;
-
-  const t = getTranslation(settings.language || 'pt');
 
   return (
     <div
@@ -157,13 +155,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <span>POLÍTICA DE PRIVACIDADE</span>
             </button>
 
-            {/* Formulário de Suporte Button */}
+            {/* E-mail de Suporte Button */}
             <button
               onClick={() => setSubView('support')}
               className="w-full h-11 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-display font-black text-xs tracking-wider flex items-center justify-center gap-2.5 shadow-md shadow-sky-500/25 active:scale-98 transition-all cursor-pointer"
             >
               <HelpCircle className="w-4 h-4" />
-              <span>FORMULÁRIO DE SUPORTE</span>
+              <span>E-MAIL DE SUPORTE</span>
             </button>
 
             {/* Prominent Footer Close Button - Impossible to miss! */}
@@ -217,28 +215,40 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
         {/* SubView: Privacy Policy */}
         {subView === 'privacy' && (
-          <div className="p-4 text-xs text-slate-600 space-y-2 max-h-[320px] overflow-y-auto">
+          <div className="p-4 text-xs text-slate-600 space-y-3 max-h-[320px] overflow-y-auto">
             <h4 className="font-bold text-slate-800 text-sm">Política de Privacidade</h4>
             <p>
               Este jogo valoriza a privacidade dos jogadores. Seus dados de progresso e níveis completados são mantidos com total segurança no seu próprio dispositivo através do armazenamento local.
             </p>
             <p>
-              Não coletamos informações pessoais identificáveis sem seu consentimento expresso.
+              Para consultar os termos detalhados e a política de privacidade completa, acesse a página oficial:
             </p>
+            <a
+              href="https://politicadelxus.mestredotrafego.link/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs border border-sky-200 transition-colors shadow-sm w-full justify-center"
+            >
+              <span>Abrir Política de Privacidade</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
         )}
 
         {/* SubView: Support */}
         {subView === 'support' && (
-          <div className="p-4 text-xs text-slate-600 space-y-2.5 text-center">
-            <HelpCircle className="w-8 h-8 text-sky-500 mx-auto" />
-            <h4 className="font-bold text-slate-800 text-sm">Central de Ajuda</h4>
+          <div className="p-4 text-xs text-slate-600 space-y-3 text-center">
+            <Mail className="w-8 h-8 text-sky-500 mx-auto" />
+            <h4 className="font-bold text-slate-800 text-sm">Email de Suporte</h4>
             <p>
-              Precisa de ajuda com alguma fase ou tem alguma sugestão para o jogo? Fale conosco!
+              Precisa de ajuda com alguma fase, tem dúvidas ou sugestões? Entre em contato conosco diretamente pelo e-mail:
             </p>
-            <div className="p-2.5 rounded-xl bg-sky-50 text-sky-700 font-mono text-[11px] font-bold">
-              suporte@cacapalavrasbrasil.com
-            </div>
+            <a
+              href="mailto:Suporte.Delxus@gmail.com"
+              className="p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-mono text-xs font-bold border border-sky-200 transition-colors shadow-sm block break-all"
+            >
+              Suporte.Delxus@gmail.com
+            </a>
           </div>
         )}
       </div>

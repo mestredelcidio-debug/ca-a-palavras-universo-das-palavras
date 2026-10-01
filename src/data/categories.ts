@@ -16,7 +16,7 @@ export const CATEGORIES: CategoryData[] = [
       'AÇAÍ', 'CUPUAÇU', 'JABUTICABA', 'GRAVIOLA', 'CAJU',
       'PITANGA', 'MARACUJÁ', 'GOIABA', 'MANGA', 'ABACAXI',
       'PITOMBA', 'CAJÁ', 'ACEROLA', 'BACURI', 'GUARANÁ',
-      'BURITI', 'CAMU CAMU', 'MURICI', 'PEQUI', 'UMBU',
+      'BURITI', 'CAMU-CAMU', 'MURICI', 'PEQUI', 'UMBU',
       'BANANA', 'MELANCIA', 'MAMÃO', 'CARAMBOLA', 'FIGO',
       'JENIPAPO', 'MANGABA', 'SERIGUELA', 'BIRIBÁ', 'CAMBUCI',
       'BACUPARI', 'UVAIA', 'ABIU', 'ARAÇÁ', 'SAPOTI',
@@ -29,9 +29,9 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Animais emblemáticos dos nossos biomas',
     iconName: 'PawPrint',
     words: [
-      'ONÇA PINTADA', 'CAPIVARA', 'ARARA AZUL', 'MICO LEÃO', 'TAMANDUÁ',
-      'TATU BOLA', 'TUCANO', 'BOTO ROSA', 'PREGUIÇA', 'JACARÉ',
-      'JIBOIA', 'LOBO GUARÁ', 'QUATI', 'ANTA', 'JAGUATIRICA',
+      'ONÇA-PINTADA', 'CAPIVARA', 'ARARA AZUL', 'MICO-LEÃO', 'TAMANDUÁ',
+      'TATU-BOLA', 'TUCANO', 'BOTO ROSA', 'PREGUIÇA', 'JACARÉ',
+      'JIBOIA', 'LOBO-GUARÁ', 'QUATI', 'ANTA', 'JAGUATIRICA',
       'SUÇUARANA', 'CUTIA', 'SAGUI', 'PAPAGAIO', 'CORUJA',
       'GOLFINHO', 'BALEIA', 'TARTARUGA', 'GAVIÃO', 'GARÇA',
       'HARPIA', 'IRARA', 'CERVO', 'TEIÚ', 'MUTUM',
@@ -46,12 +46,12 @@ export const CATEGORIES: CategoryData[] = [
     iconName: 'Trees',
     words: [
       'FLORESTA', 'PANTANAL', 'CACHOEIRA', 'RIO AMAZONAS', 'PLANALTO',
-      'VAGALUME', 'CERRADO', 'MATA ATLÂNTICA', 'MANGUEZAL', 'VEREDA',
-      'CAATINGA', 'GRUTA', 'CHAPADA', 'IGUAPÓ', 'SERRA DO MAR',
-      'IGARAPÉ', 'ARARIPE', 'RESTINGA', 'VITÓRIA RÉGIA', 'ORQUÍDEA',
+      'VAGA-LUME', 'CERRADO', 'MATA ATLÂNTICA', 'MANGUEZAL', 'VEREDA',
+      'CAATINGA', 'GRUTA', 'CHAPADA', 'IGAPÓ', 'SERRA DO MAR',
+      'IGARAPÉ', 'ARARIPE', 'RESTINGA', 'VITÓRIA-RÉGIA', 'ORQUÍDEA',
       'PAMPA', 'ENCONTRO DAS ÁGUAS', 'SERRA DA CANASTRA', 'CANUDOS', 'JALAPÃO',
       'LENÇÓIS', 'BONITO', 'CORREDEIRA', 'NASCENTE', 'BROMÉLIA',
-      'IPÊ AMARELO', 'SERRANIA', 'PINHEIRO', 'ARAU CÁRIA', 'ABISMO'
+      'IPÊ AMARELO', 'SERRANIA', 'PINHEIRO', 'ARAUCÁRIA', 'ABISMO'
     ]
   },
   {
@@ -60,9 +60,9 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Areia dourada, mar azul e brisa costeira',
     iconName: 'Sun',
     words: [
-      'AREIA', 'ONDA', 'MAR', 'CONCHA', 'GUARDA SOL',
+      'AREIA', 'ONDA', 'MAR', 'CONCHA', 'GUARDA-SOL',
       'CANGA', 'ÁGUA DE COCO', 'PRANCHA', 'CALÇADÃO', 'MARESIA',
-      'SALVA VIDAS', 'BRISA', 'CASTELO', 'DUNA', 'FAROL',
+      'SALVA-VIDAS', 'BRISA', 'CASTELO', 'DUNA', 'FAROL',
       'PROTETOR', 'ÓCULOS', 'SURFISTA', 'QUIOSQUE', 'MERGULHO',
       'CHINELO', 'PÔR DO SOL', 'CORAIS', 'MARÉ ALTA', 'BANHO DE MAR',
       'COQUEIRO', 'ARPOADOR', 'COPACABANA', 'IPANEMA', 'PORTO DE GALINHAS',
@@ -75,7 +75,7 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Folclore, forró, cordel e calor do nordeste',
     iconName: 'Flame',
     words: [
-      'CORDEL', 'CAPOEIRA', 'BOI BUMBÁ', 'FESTA JUNINA', 'CIRANDA',
+      'CORDEL', 'CAPOEIRA', 'BOI-BUMBÁ', 'FESTA JUNINA', 'CIRANDA',
       'MACULELÊ', 'VIOLA', 'SACI', 'CURUPIRA', 'IARA',
       'ARTESANATO', 'REPENTE', 'CARRANCA', 'LITERATURA', 'BERIMBAU',
       'PARINTINS', 'BONECOS', 'FANDANGO', 'CATIRA', 'FORRÓ',
@@ -103,7 +103,7 @@ export const CATEGORIES: CategoryData[] = [
     iconName: 'Sparkles',
     words: [
       'FANTASIA', 'SAMBA', 'SAMBÓDROMO', 'SERPENTINA', 'CONFETE',
-      'BLOCO', 'BATERIA', 'MESTRE SALA', 'PORTA BANDEIRA', 'ALEGORIA',
+      'BLOCO', 'BATERIA', 'MESTRE-SALA', 'PORTA-BANDEIRA', 'ALEGORIA',
       'ESTANDARTE', 'CORDÃO', 'TAMBORIM', 'CUÍCA', 'AGOGÔ',
       'MARACATU', 'FREVO', 'TRIO ELÉTRICO', 'ABADÁ', 'PASSISTA',
       'ENREDO', 'CARRO', 'PANDEIRO', 'REPIQUE', 'SURDO'
@@ -130,7 +130,7 @@ export const CATEGORIES: CategoryData[] = [
     words: [
       'CHURRASCO', 'CHIMARRÃO', 'COSTELA', 'PICANHA', 'ESPETO',
       'CUIA', 'BOMBA', 'FARROUPILHA', 'GAÚCHO', 'PONCHO',
-      'FANDANGO', 'GALPÃO', 'CAMPANHA', 'BOLEADEIRA', 'ERVA MATE',
+      'FANDANGO', 'GALPÃO', 'CAMPANHA', 'BOLEADEIRA', 'ERVA-MATE',
       'CHARQUE', 'ARROZ DE CARRETEIRO', 'MATAMBRE', 'LINGUIÇA', 'VINHO'
     ]
   },
@@ -153,7 +153,7 @@ export const CATEGORIES: CategoryData[] = [
     iconName: 'Music',
     words: [
       'BOSSA NOVA', 'CHORO', 'AXÉ', 'FORRÓ', 'PAGODE',
-      'SAMBA ROCK', 'BAIÃO', 'XOTE', 'MARACATU', 'FREVO',
+      'SAMBA-ROCK', 'BAIÃO', 'XOTE', 'MARACATU', 'FREVO',
       'CAVAQUINHO', 'VIOLÃO', 'PANDEIRO', 'TAMBOR', 'SANFONA',
       'ZABUMBA', 'BERIMBAU', 'ATABAQUE', 'GUITARRA BAIANA', 'SURDO'
     ]
@@ -200,10 +200,10 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Mitos ancestrais e personagens do imaginário popular',
     iconName: 'Sparkles',
     words: [
-      'SACI PERERÊ', 'CURUPIRA', 'IARA', 'BOTO ROSA', 'CAIPORA',
-      'MULA SEM CABEÇA', 'BOITATÁ', 'LOBISOMEM', 'NEGRINHO', 'VITÓRIA RÉGIA',
+      'SACI-PERERÊ', 'CURUPIRA', 'IARA', 'BOTO ROSA', 'CAIPORA',
+      'MULA SEM CABEÇA', 'BOITATÁ', 'LOBISOMEM', 'NEGRINHO', 'VITÓRIA-RÉGIA',
       'COBRA GRANDE', 'MAPINGUARI', 'MATINTA PEREIRA', 'PISADEIRA', 'CORPO SECO',
-      'ALAMOIA', 'CUCA', 'CABOCLO D ÁGUA', 'MÃE DO OURO', 'UIRAPURU'
+      'ALAMOIA', 'CUCA', 'CABOCLO D’ÁGUA', 'MÃE DO OURO', 'UIRAPURU'
     ]
   },
   {
@@ -224,8 +224,8 @@ export const CATEGORIES: CategoryData[] = [
     description: 'A força monumental das águas e arco-íris',
     iconName: 'Waves',
     words: [
-      'GARGANTA DO DIABO', 'CATARATAS', 'ARCO ÍRIS', 'PASSARELA', 'RIO IGUAÇU',
-      'PARQUE NACIONAL', 'QUEDAS D ÁGUA', 'BORRIFO', 'BARCO MACUCO', 'MATA ATLÂNTICA',
+      'GARGANTA DO DIABO', 'CATARATAS', 'ARCO-ÍRIS', 'PASSARELA', 'RIO IGUAÇU',
+      'PARQUE NACIONAL', 'QUEDAS D’ÁGUA', 'BORRIFO', 'BARCO MACUCO', 'MATA ATLÂNTICA',
       'QUATI', 'BORBOLETÁRIO', 'MIRANTE', 'TRÍPLICE FRONTEIRA', 'BALSAS',
       'TURBULÊNCIA', 'NÉVOA', 'VOLUME', 'ESPETÁCULO', 'CORRENTEZA'
     ]
@@ -236,8 +236,8 @@ export const CATEGORIES: CategoryData[] = [
     description: 'O duelo mágico entre o Garantido e o Caprichoso',
     iconName: 'Sparkles',
     words: [
-      'BOI GARANTIDO', 'BOI CAPRICHOSO', 'BUMBÓDROMO', 'CUNHÃ PORANGA', 'PAJÉ',
-      'SINHÁZINHA', 'PORTA ESTANDARTE', 'BATUCADA', 'MARUJADA', 'TOADA',
+      'BOI GARANTIDO', 'BOI CAPRICHOSO', 'BUMBÓDROMO', 'CUNHÃ-PORANGA', 'PAJÉ',
+      'SINHÁZINHA', 'PORTA-ESTANDARTE', 'BATUCADA', 'MARUJADA', 'TOADA',
       'ALEGORIA GIGANTE', 'TRIBOS INDÍGENAS', 'AMAZÔNIA', 'VERMELHO', 'AZUL',
       'FESTA POPULAR', 'TORCIDA APAIXONADA', 'RITMO', 'AUTO DO BOI', 'LENDA'
     ]
@@ -248,7 +248,7 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Nascentes do Rio São Francisco e paredões de pedra',
     iconName: 'Compass',
     words: [
-      'CASCA D ANTA', 'RIO SÃO FRANCISCO', 'NASCENTE', 'LOBO GUARÁ', 'TAMANDUÁ BANDEIRA',
+      'CASCA D’ANTA', 'RIO SÃO FRANCISCO', 'NASCENTE', 'LOBO-GUARÁ', 'TAMANDUÁ-BANDEIRA',
       'PATRIMÔNIO', 'CHAPADÃO', 'QUEIJARIA', 'PAREDÃO', 'TRILHA',
       'VEADO CAMPEIRO', 'GAVIÃO REAL', 'CURRAL DE PEDRA', 'CACHOEIRA', 'SERRA',
       'MIRANTE DO ROLADOR', 'CÂNION', 'POÇO AZUL', 'VENTANIA', 'ECOTURISMO'
@@ -260,10 +260,10 @@ export const CATEGORIES: CategoryData[] = [
     description: 'Arte urbana, culinária do mundo e energia pulsante',
     iconName: 'Landmark',
     words: [
-      'AVENIDA PAULISTA', 'MASP', 'IBIRAPUERA', 'MERCADO MUNICIPAL', 'PINALCOTECA',
+      'AVENIDA PAULISTA', 'MASP', 'IBIRAPUERA', 'MERCADO MUNICIPAL', 'PINACOTECA',
       'LIBERDADE', 'VILA MADALENA', 'BECO DO BATMAN', 'TEATRO MUNICIPAL', 'FAROL SANTANDER',
       'PASTEL DE FEIRA', 'SANDUÍCHE DE MORTADELA', 'METRÔ', 'VIADUTO DO CHÁ', 'RUA 25 DE MARÇO',
-      'GRAFITE', 'CULTURA', 'ARRANHA CÉU', 'GASTRONOMIA', 'PAULISTANO'
+      'GRAFITE', 'CULTURA', 'ARRANHA-CÉU', 'GASTRONOMIA', 'PAULISTANO'
     ]
   },
   {
@@ -285,7 +285,7 @@ export const CATEGORIES: CategoryData[] = [
     iconName: 'Trees',
     words: [
       'VALE DA LUA', 'CACHOEIRA SANTA BÁRBARA', 'ALTO PARAÍSO', 'SÃO JORGE', 'PARQUE NACIONAL',
-      'SALTO DO RIO PRETO', 'CANIONS', 'CRISTAIS DE QUARTZO', 'MIRANTE DA JANELA', 'ÁGUA CRISTALINA',
+      'SALTO DO RIO PRETO', 'CÂNIONS', 'CRISTAIS DE QUARTZO', 'MIRANTE DA JANELA', 'ÁGUA CRISTALINA',
       'CERRADO', 'TRILHA DAS SETE QUEDAS', 'ENCONTRO DAS ÁGUAS', 'POÇO ENCANTADO', 'ARIRANHA',
       'FLOR DO CERRADO', 'SERRANIA', 'ASTROTURISMO', 'CÉU ESTRELADO', 'MISTICISMO'
     ]
@@ -324,18 +324,6 @@ export const CATEGORIES: CategoryData[] = [
       'BORDADO DE CAICÓ', 'TALHA EM MADEIRA', 'FIBRA DE BURITI', 'PANELA DE BARRO', 'XILOGRAVURA',
       'ESCULTURA', 'TEAR MANUAL', 'CESTAS DE PALHA', 'RENDA RENASCENÇA', 'CHITA COLORIDA',
       'MARACÁ', 'CUIAS PINTADAS', 'ARTE INDÍGENA', 'BIJUTERIA NATURAL', 'MESTRE ARTESÃO'
-    ]
-  },
-  {
-    id: 'noronha',
-    title: 'Fernando de Noronha',
-    description: 'Águas cristalinas, santuário de golfinhos e praia do Sancho',
-    iconName: 'Waves',
-    words: [
-      'BAÍA DO SANCHO', 'MORRO DO PICO', 'BAÍA DOS PORCOS', 'GOLFINHO ROTADOR', 'TARTARUGA MARINHA',
-      'BURACO DO GALAIS', 'PRAIA DO LEÃO', 'CACIMBA DO PADRE', 'MERGULHO', 'ARQUIPÉLAGO',
-      'ATOL DAS ROCAS', 'TUBARÃO LIXA', 'CORAIS', 'MIRANTE DOS BOLINHOS', 'PARQUE MARINHO',
-      'PRESERVAÇÃO', 'ÁGUA ESMERALDA', 'PÔR DO SOL', 'FORTALEZA DOS REMÉDIOS', 'ILHA DOS RATOS'
     ]
   },
   {

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Caça-Palavras Brasil</string>
+    <string name="title_activity_main">Caça-Palavras Brasil</string>
+    <string name="package_name">com.mestredelcidio.cacapalavrasbrasil</string>
+    <string name="custom_url_scheme">com.mestredelcidio.cacapalavrasbrasil</string>
+</resources>

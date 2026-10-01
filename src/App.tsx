@@ -14,7 +14,7 @@ import { CHAPTERS, ChapterData, getChapterForLevel, getChapterById } from './dat
 import { Difficulty, GameSettings, PuzzleData, UserProfile } from './types/game';
 import { loadUserProfile, saveUserProfile, loadGameSettings, saveGameSettings } from './utils/storage';
 import { generatePuzzle } from './utils/puzzleGenerator';
-import { playVictoryFanfare, playWordFoundChime, playHintSparkle } from './utils/audio';
+import { playVictoryFanfare, playWordFoundChime, playHintSparkle, toggleAmbientMusic } from './utils/audio';
 import { GLOBAL_MISSIONS, Mission, advanceMissionTier, generateChapterMissions } from './data/missions';
 import { isGiftAvailableToday } from './data/dailyGifts';
 import { GAME_MODES, GameModeDefinition, ConsumableItem } from './data/gameModes';
@@ -98,6 +98,15 @@ export default function App() {
   const [showFullShop, setShowFullShop] = useState<boolean>(false);
   const [showBackgroundSelector, setShowBackgroundSelector] = useState<boolean>(false);
   const [newChapterRewardModal, setNewChapterRewardModal] = useState<ChapterData | null>(null);
+
+  // Save profile and manage ambient music
+  useEffect(() => {
+    saveUserProfile(profile);
+  }, [profile]);
+
+  useEffect(() => {
+    toggleAmbientMusic(settings.musicEnabled, settings.sfxVolume);
+  }, [settings.musicEnabled, settings.sfxVolume]);
 
   const handleClaimRewardCoins = (amountOrItem: number | string) => {
     const addCoins = typeof amountOrItem === 'number' ? amountOrItem : 100;

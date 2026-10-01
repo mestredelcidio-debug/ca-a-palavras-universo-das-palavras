@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Caça-Palavras Brasileiro - Protótipo</title>
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #065f46;
+      --accent: #f59e0b;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --cell-bg: #334155;
+      --cell-hover: #475569;
+      --cell-selected: #f59e0b;
+      --cell-found: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 16px 12px;
+      touch-action: manipulation;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #34d399, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .theme-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* Word Counter & Controls */
+    .status-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+    }
+
+    .counter {
+      font-weight: 700;
+      color: #34d399;
+    }
+
+    .btn-new {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-new:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-new:active {
+      transform: scale(0.96);
+    }
+
+    /* 10x10 Grid */
+    .grid-container {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+      gap: 4px;
+      background: var(--card-bg);
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      touch-action: none;
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cell-bg);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, color 0.15s;
+    }
+
+    /* Selected trail */
+    .cell.selected {
+      background: var(--cell-selected) !important;
+      color: #0f172a !important;
+      transform: scale(1.06);
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+      z-index: 2;
+    }
+
+    /* Found word (permanent green) */
+    .cell.found {
+      background: var(--cell-found) !important;
+      color: #ffffff !important;
+      font-weight: 800;
+    }
+
+    /* Word List */
+    .word-list-card {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .word-list-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .words-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .word-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: all 0.3s;
+    }
+
+    .word-chip.found {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #34d399;
+      text-decoration: line-through;
+      opacity: 0.65;
+      transform: scale(0.95);
+    }
+
+    /* Victory Banner */
+    .victory-banner {
+      display: none;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.15));
+      border: 1px solid #10b981;
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      animation: pop 0.4s ease-out forwards;
+    }
+
+    .victory-banner.show {
+      display: block;
+    }
+
+    .victory-banner h2 {
+      font-size: 1.1rem;
+      color: #34d399;
+      margin-bottom: 2px;
+    }
+
+    .victory-banner p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Caça-Palavras Brasil</h1>
+      <div id="theme-badge" class="theme-badge">Tema: Frutas Tropicais</div>
+    </header>
+
+    <div class="status-bar">
+      <div id="counter" class="counter">Restam 6 palavras</div>
+      <button id="btn-new-game" class="btn-new">Novo Tema</button>
+    </div>
+
+    <!-- Victory message -->
+    <div id="victory-banner" class="victory-banner">
+      <h2>🎉 Parabéns!</h2>
+      <p>Você encontrou todas as palavras deste tema brasileiro!</p>
+    </div>
+
+    <!-- 10x10 CSS Grid -->
+    <div id="grid" class="grid-container"></div>
+
+    <!-- Word list -->
+    <div class="word-list-card">
+      <div class="word-list-title">Palavras para encontrar:</div>
+      <div id="words-container" class="words-container"></div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. ARQUITETURA DE DADOS: Temas da Cultura Brasileira
+       ========================================================================= */
+    const THEMES = [
+      {
+        name: "Frutas Tropicais",
+        words: ["ACAI", "CAJU", "MANGA", "GOIABA", "ABACAXI", "PITANGA"]
+      },
+      {
+        name: "Capitais do Brasil",
+        words: ["BRASILIA", "SALVADOR", "RECIFE", "MANAUS", "CURITIBA", "NATAL"]
+      },
+      {
+        name: "Comidas Típicas",
+        words: ["FEIJOADA", "MOQUECA", "COXINHA", "PASTEL", "TAPIOCA", "FAROFA"]
+      },
+      {
+        name: "Animais da Fauna",
+        words: ["CAPIVARA", "ARARA", "TUCANO", "JACARE", "PREGUICA", "TATU"]
+      },
+      {
+        name: "Ritmos Musicais",
+        words: ["SAMBA", "FORRO", "CHORO", "FREVO", "MARACATU", "BAIAO"]
+      }
+    ];
+
+    const GRID_SIZE = 10;
+    let currentTheme = null;
+    let gridData = [];
+    let placedWords = []; // { word, path: [{r, c}] }
+    let foundWords = new Set();
+
+    // Selection Dragging State
+    let isSelecting = false;
+    let startCell = null;
+    let currentPath = [];
+
+    // DOM Elements
+    const gridEl = document.getElementById("grid");
+    const themeBadgeEl = document.getElementById("theme-badge");
+    const counterEl = document.getElementById("counter");
+    const wordsContainerEl = document.getElementById("words-container");
+    const victoryBannerEl = document.getElementById("victory-banner");
+    const btnNewGame = document.getElementById("btn-new-game");
+
+    /* =========================================================================
+       2. ALGORITMO DE GERAÇÃO: Matriz 10x10 (Horizontal & Vertical)
+       ========================================================================= */
+    function initGame() {
+      // Pick random theme
+      currentTheme = THEMES[Math.floor(Math.random() * THEMES.length)];
+      themeBadgeEl.textContent = `Tema: ${currentTheme.name}`;
+      victoryBannerEl.classList.remove("show");
+
+      foundWords.clear();
+      placedWords = [];
+
+      // Create empty 10x10 matrix
+      gridData = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(""));
+
+      // Place each word either horizontally or vertically
+      const wordsToPlace = [...currentTheme.words];
+      // Sort longest first to facilitate fitting
+      wordsToPlace.sort((a, b) => b.length - a.length);
+
+      for (const word of wordsToPlace) {
+        let placed = false;
+        let attempts = 0;
+
+        while (!placed && attempts < 100) {
+          attempts++;
+          const isHorizontal = Math.random() < 0.5;
+          const maxRow = isHorizontal ? GRID_SIZE : GRID_SIZE - word.length;
+          const maxCol = isHorizontal ? GRID_SIZE - word.length : GRID_SIZE;
+
+          const startR = Math.floor(Math.random() * maxRow);
+          const startC = Math.floor(Math.random() * maxCol);
+
+          // Check if can place
+          let canFit = true;
+          const path = [];
+
+          for (let i = 0; i < word.length; i++) {
+            const r = isHorizontal ? startR : startR + i;
+            const c = isHorizontal ? startC + i : startC;
+
+            if (gridData[r][c] !== "" && gridData[r][c] !== word[i]) {
+              canFit = false;
+              break;
+            }
+            path.push({ r, c });
+          }
+
+          if (canFit) {
+            for (let i = 0; i < word.length; i++) {
+              const { r, c } = path[i];
+              gridData[r][c] = word[i];
+            }
+            placedWords.push({ word, path });
+            placed = true;
+          }
+        }
+      }
+
+      // Preencher células vazias com letras maiúsculas aleatórias (A-Z)
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for (let r = 0; r < GRID_SIZE; r++) {
+        for (let c = 0; c < GRID_SIZE; c++) {
+          if (gridData[r][c] === "") {
+            gridData[r][c] = alphabet[Math.floor(Math.random() * alphabet.length)];
+          }
+        }
+      }
+
+      renderGrid();
+      renderWordList();
+      updateCounter();
+    }
+
+    /* =========================================================================
+       3. INTERFACE DE SELEÇÃO: Renderização CSS Grid & Eventos de Arraste
+       ========================================================================= */
+    function renderGrid() {
+      gridEl.innerHTML = "";
+
+      for (let r = 0; r < GRID_SIZE; r++) {
+        for (let c = 0; c < GRID_SIZE; c++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          cell.textContent = gridData[r][c];
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          gridEl.appendChild(cell);
+        }
+      }
+    }
+
+    function renderWordList() {
+      wordsContainerEl.innerHTML = "";
+      placedWords.forEach(pw => {
+        const chip = document.createElement("div");
+        chip.className = "word-chip" + (foundWords.has(pw.word) ? " found" : "");
+        chip.id = `chip-${pw.word}`;
+        chip.textContent = pw.word;
+        wordsContainerEl.appendChild(chip);
+      });
+    }
+
+    function updateCounter() {
+      const remaining = placedWords.length - foundWords.size;
+      counterEl.textContent = remaining === 0 
+        ? "Todas as palavras encontradas!" 
+        : `Restam ${remaining} ${remaining === 1 ? "palavra" : "palavras"}`;
+
+      if (remaining === 0) {
+        victoryBannerEl.classList.add("show");
+      }
+    }
+
+    // Helper: calculate straight line path (Horizontal / Vertical)
+    function calculatePath(start, end) {
+      const dr = end.r - start.r;
+      const dc = end.c - start.c;
+      const path = [];
+
+      // Determine dominant direction: strictly horizontal or vertical
+      if (Math.abs(dr) >= Math.abs(dc)) {
+        // Vertical line
+        const step = dr >= 0 ? 1 : -1;
+        for (let r = start.r; r !== end.r + step; r += step) {
+          path.push({ r, c: start.c });
+        }
+      } else {
+        // Horizontal line
+        const step = dc >= 0 ? 1 : -1;
+        for (let c = start.c; c !== end.c + step; c += step) {
+          path.push({ r: start.r, c });
+        }
+      }
+      return path;
+    }
+
+    // Get cell from screen coordinates (touch or mouse)
+    function getCellFromCoordinates(clientX, clientY) {
+      const elem = document.elementFromPoint(clientX, clientY);
+      if (elem && elem.classList.contains("cell")) {
+        return {
+          r: parseInt(elem.dataset.row, 10),
+          c: parseInt(elem.dataset.col, 10)
+        };
+      }
+      return null;
+    }
+
+    function highlightSelection(path) {
+      // Clear previous selection highlight
+      document.querySelectorAll(".cell.selected").forEach(el => el.classList.remove("selected"));
+
+      // Highlight new path
+      path.forEach(({ r, c }) => {
+        const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+        if (cell) {
+          cell.classList.add("selected");
+        }
+      });
+    }
+
+    // Pointer / Mouse / Touch Handlers
+    function onPointerDown(e) {
+      const cell = getCellFromCoordinates(e.clientX, e.clientY);
+      if (!cell) return;
+
+      isSelecting = true;
+      startCell = cell;
+      currentPath = [cell];
+      highlightSelection(currentPath);
+    }
+
+    function onPointerMove(e) {
+      if (!isSelecting || !startCell) return;
+
+      const cell = getCellFromCoordinates(e.clientX, e.clientY);
+      if (!cell) return;
+
+      currentPath = calculatePath(startCell, cell);
+      highlightSelection(currentPath);
+    }
+
+    /* =========================================================================
+       4. VALIDAÇÃO: String Formada, Fundo Verde Permanente & Risco na Lista
+       ========================================================================= */
+    function onPointerUp() {
+      if (!isSelecting) return;
+      isSelecting = false;
+
+      if (currentPath.length > 0) {
+        // Build forward and reverse strings
+        let selectedStr = "";
+        currentPath.forEach(({ r, c }) => {
+          selectedStr += gridData[r][c];
+        });
+        const reversedStr = selectedStr.split("").reverse().join("");
+
+        // Find match in placedWords
+        const match = placedWords.find(
+          pw => !foundWords.has(pw.word) && (pw.word === selectedStr || pw.word === reversedStr)
+        );
+
+        if (match) {
+          // Palavra encontrada!
+          foundWords.add(match.word);
+
+          // Mude a cor de fundo permanentemente para verde
+          match.path.forEach(({ r, c }) => {
+            const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+            if (cell) {
+              cell.classList.add("found");
+            }
+          });
+
+          // Risque a palavra da lista de termos a encontrar
+          const chip = document.getElementById(`chip-${match.word}`);
+          if (chip) {
+            chip.classList.add("found");
+          }
+
+          updateCounter();
+        }
+      }
+
+      // Remove selection highlight trail
+      document.querySelectorAll(".cell.selected").forEach(el => el.classList.remove("selected"));
+      currentPath = [];
+      startCell = null;
+    }
+
+    // Event Listeners for Touch and Mouse
+    gridEl.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
+
+    // New Game Button
+    btnNewGame.addEventListener("click", initGame);
+
+    // Initial Start
+    initGame();
+  </script>
+</body>
+</html>
