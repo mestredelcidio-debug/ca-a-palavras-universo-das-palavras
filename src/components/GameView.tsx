@@ -39,6 +39,8 @@ import { IN_GAME_POWERUPS, InGamePowerup } from '../data/inGamePowerups';
 import { TropicalPartyParticles, TropicalParticle } from './TropicalPartyParticles';
 import { playWordFoundChime, playHintSparkle, playLetterTick } from '../utils/audio';
 
+import { showRewardedAd, showInterstitialAd } from '../utils/ads';
+
 interface GameViewProps {
   levelNumber: number;
   difficulty: Difficulty;
@@ -578,68 +580,65 @@ export const GameView: React.FC<GameViewProps> = ({
     if (!activeMode) return;
     const item = activeMode.consumableItem;
 
-    // Trigger ad logic here
-    const adWatched = true;
-    if (!adWatched) return;
+    // Trigger Google Rewarded Ad
+    showRewardedAd(`mode_consumable_${activeMode.id}`, () => {
+      // Reward logic after ad is viewed
+      playHintSparkle(soundEnabled, 0.8);
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
 
-    playHintSparkle(soundEnabled, 0.8);
-    confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
-
-    switch (activeMode.id) {
-      case 1:
-        setAbyssPercent(prev => Math.max(0, prev - 35));
-        setTimeRemaining(prev => prev + 15);
-        setDefeatModalOpen(false);
-        break;
-      case 2:
-        setRevealedFirstLetters(true);
-        break;
-      case 3:
-        setGlassesActive(true);
-        setTimeout(() => setGlassesActive(false), 30000);
-        break;
-      case 5:
-        setBombDisarmed(true);
-        setDefeatModalOpen(false);
-        break;
-      case 6:
-        setVowelsRevealed(true);
-        break;
-      case 7:
-        setTimeRemaining(prev => prev + 15);
-        setDefeatModalOpen(false);
-        break;
-      case 9:
-        setDictionaryActive(true);
-        onUseHint();
-        break;
-      case 10:
-        setLives(3);
-        setDefeatModalOpen(false);
-        break;
-      case 12:
-        setIsStabilized(true);
-        setTimeout(() => setIsStabilized(false), 20000);
-        break;
-      case 14:
-        setFlashlightBoosted(true);
-        break;
-      case 15:
-        setTimeRemaining(prev => prev + 30);
-        setDefeatModalOpen(false);
-        break;
-      default:
-        onUseHint();
-    }
+      switch (activeMode.id) {
+        case 1:
+          setAbyssPercent(prev => Math.max(0, prev - 35));
+          setTimeRemaining(prev => prev + 15);
+          setDefeatModalOpen(false);
+          break;
+        case 2:
+          setRevealedFirstLetters(true);
+          break;
+        case 3:
+          setGlassesActive(true);
+          setTimeout(() => setGlassesActive(false), 30000);
+          break;
+        case 5:
+          setBombDisarmed(true);
+          setDefeatModalOpen(false);
+          break;
+        case 6:
+          setVowelsRevealed(true);
+          break;
+        case 7:
+          setTimeRemaining(prev => prev + 15);
+          setDefeatModalOpen(false);
+          break;
+        case 9:
+          setDictionaryActive(true);
+          onUseHint();
+          break;
+        case 10:
+          setLives(3);
+          setDefeatModalOpen(false);
+          break;
+        case 12:
+          setIsStabilized(true);
+          setTimeout(() => setIsStabilized(false), 20000);
+          break;
+        case 14:
+          setFlashlightBoosted(true);
+          break;
+        case 15:
+          setTimeRemaining(prev => prev + 30);
+          setDefeatModalOpen(false);
+          break;
+        default:
+          onUseHint();
+      }
+    });
   };
 
   // Use an In-Game Facility Powerup (Watch ad instead of spending coins)
   const handleUseFacilityPowerup = (powerup: InGamePowerup) => {
-    // TRIGGER AD WATCHER HERE (Assume a function onWatchAd exists in App/GameView props)
-    // For now, simulating ad completion:
-    const adWatched = true; 
-
-    if (adWatched) {
+    // Trigger Google Rewarded Ad
+    showRewardedAd(`facility_${powerup.id}`, () => {
       playHintSparkle(soundEnabled, 0.85);
 
       // Apply facility effect
@@ -696,7 +695,7 @@ export const GameView: React.FC<GameViewProps> = ({
           break;
         }
       }
-    }
+    });
   };
 
   const selectedCellsSet = new Set(selectedPath.map(p => `${p.row},${p.col}`));

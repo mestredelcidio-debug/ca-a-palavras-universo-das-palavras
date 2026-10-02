@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { X, Play, Sparkles, Check, Film, Gift, Coins, Trophy, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Play, Sparkles, Check, Film, Gift, Coins } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { REWARD_BOXES, RewardBox } from '../data/rewardBoxes';
+import { showRewardedAd } from '../utils/ads';
 
 interface RewardBoxesModalProps {
   isOpen: boolean;
@@ -16,53 +17,26 @@ export const RewardBoxesModal: React.FC<RewardBoxesModalProps> = ({
   onClaimCoins,
   claimedBoxIds = []
 }) => {
-  const [activeWatchingBox, setActiveWatchingBox] = useState<RewardBox | null>(null);
-  const [adCountdown, setAdCountdown] = useState<number>(4);
-  const [adFinished, setAdFinished] = useState<boolean>(false);
   const [claimedBoxes, setClaimedBoxes] = useState<number[]>(claimedBoxIds);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (activeWatchingBox) {
-      setAdCountdown(4);
-      setAdFinished(false);
-
-      timer = setInterval(() => {
-        setAdCountdown(prev => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            setAdFinished(true);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [activeWatchingBox]);
 
   if (!isOpen) return null;
 
   const handleStartWatchAd = (box: RewardBox) => {
-    setActiveWatchingBox(box);
-  };
+    // Trigger Google Rewarded Ad
+    showRewardedAd(`reward_box_${box.id}`, () => {
+      // Ad finished successfully
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#ffffff']
+        });
+      } catch {}
 
-  const handleCollectReward = () => {
-    if (!activeWatchingBox) return;
-
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#ffffff']
-      });
-    } catch {}
-
-    onClaimCoins(activeWatchingBox.coinsReward);
-    setClaimedBoxes(prev => [...prev, activeWatchingBox.id]);
-    setActiveWatchingBox(null);
-    setAdFinished(false);
+      onClaimCoins(box.coinsReward);
+      setClaimedBoxes(prev => [...prev, box.id]);
+    });
   };
 
   return (
@@ -101,68 +75,6 @@ export const RewardBoxesModal: React.FC<RewardBoxesModalProps> = ({
             <X className="w-4 h-4 stroke-[3]" />
           </button>
         </div>
-
-        {/* AD PLAYER SIMULATION OVERLAY */}
-        {activeWatchingBox && (
-          <div className="absolute inset-0 bg-slate-950/95 z-30 flex flex-col items-center justify-center p-5 text-center animate-fadeIn">
-            <div className="w-16 h-16 rounded-3xl bg-amber-400/20 border-2 border-amber-400 text-amber-300 flex items-center justify-center mb-3 shadow-lg animate-pulse">
-              <Film className="w-8 h-8" />
-            </div>
-
-            <span className="text-[10px] font-black uppercase text-amber-400 tracking-widest mb-1">
-              Vídeo Patrocinado em Andamento
-            </span>
-            <h4 className="font-display font-black text-lg text-white mb-2">
-              {activeWatchingBox.title}
-            </h4>
-
-            {/* Countdown / Progress Bar */}
-            {!adFinished ? (
-              <div className="w-full max-w-[280px] flex flex-col gap-2 my-4">
-                <div className="flex items-center justify-between text-xs text-white/80 font-bold px-1">
-                  <span>Carregando recompensa...</span>
-                  <span className="font-mono text-amber-300 text-sm font-black">{adCountdown}s</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden border border-white/20">
-                  <div
-                    className="h-full bg-gradient-to-r from-amber-400 to-emerald-400 rounded-full transition-all duration-1000 ease-linear"
-                    style={{ width: `${((4 - adCountdown) / 4) * 100}%` }}
-                  />
-                </div>
-                <p className="text-[10px] text-white/60 italic">
-                  Aguarde os segundos finais para resgatar suas moedas
-                </p>
-              </div>
-            ) : (
-              <div className="w-full max-w-[280px] flex flex-col items-center gap-3 my-4 animate-scaleUp">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400 text-xs font-black uppercase">
-                  <Check className="w-4 h-4 stroke-[3]" />
-                  <span>Vídeo Assistido com Sucesso!</span>
-                </div>
-
-                <div className="text-2xl font-display font-black text-amber-300 flex items-center gap-1.5">
-                  <Coins className="w-7 h-7 text-amber-400" />
-                  <span>+{activeWatchingBox.coinsReward} MOEDAS</span>
-                </div>
-
-                <button
-                  onClick={handleCollectReward}
-                  className="w-full h-12 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-display font-black text-sm uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>RESGATAR MOEDAS AGORA</span>
-                </button>
-              </div>
-            )}
-
-            <button
-              onClick={() => setActiveWatchingBox(null)}
-              className="mt-3 text-xs text-white/50 hover:text-white underline cursor-pointer"
-            >
-              Cancelar vídeo
-            </button>
-          </div>
-        )}
 
         {/* 5 BOXES LIST */}
         <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 py-3 scrollbar-thin">
@@ -216,10 +128,24 @@ export const RewardBoxesModal: React.FC<RewardBoxesModalProps> = ({
 
                   <button
                     onClick={() => handleStartWatchAd(box)}
-                    className="py-1 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-display font-black text-[10px] uppercase tracking-wider shadow-md active:scale-95 transition-all flex items-center gap-1 cursor-pointer"
+                    disabled={isClaimed}
+                    className={`py-1 px-3 rounded-xl font-display font-black text-[10px] uppercase tracking-wider shadow-md active:scale-95 transition-all flex items-center gap-1 cursor-pointer ${
+                      isClaimed 
+                      ? 'bg-slate-700 text-slate-400 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950'
+                    }`}
                   >
-                    <Play className="w-3 h-3 fill-slate-950" />
-                    <span>ASSISTIR</span>
+                    {isClaimed ? (
+                      <>
+                        <Check className="w-3 h-3" />
+                        <span>COLETADO</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-3 h-3 fill-slate-950" />
+                        <span>ASSISTIR</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
