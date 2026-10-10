@@ -20,7 +20,6 @@ import { isGiftAvailableToday } from './data/dailyGifts';
 import { GAME_MODES, GameModeDefinition, ConsumableItem } from './data/gameModes';
 import { GameModesModal } from './components/GameModesModal';
 import { getNatureBackgroundById } from './data/natureBackgrounds';
-import { showInterstitialAd } from './utils/ads';
 
 const GLOBAL_MISSIONS_KEY = 'caca_palavras_global_missions_v2';
 const CHAPTER_MISSIONS_KEY = 'caca_palavras_chapter_missions_v2';
@@ -89,26 +88,6 @@ export default function App() {
   // Hints used in current game
   const [currentLevelHintsUsed, setCurrentLevelHintsUsed] = useState<number>(0);
 
-  // Audio pause/resume listeners for Google Ads
-  useEffect(() => {
-    const handlePause = () => {
-      toggleAmbientMusic(false);
-    };
-    const handleResume = () => {
-      if (settings.musicEnabled) {
-        toggleAmbientMusic(true, settings.musicVolume);
-      }
-    };
-
-    document.addEventListener('app:pause_audio', handlePause);
-    document.addEventListener('app:resume_audio', handleResume);
-
-    return () => {
-      document.removeEventListener('app:pause_audio', handlePause);
-      document.removeEventListener('app:resume_audio', handleResume);
-    };
-  }, [settings.musicEnabled, settings.musicVolume]);
-
   // Modals state
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showDaily, setShowDaily] = useState<boolean>(false);
@@ -134,13 +113,6 @@ export default function App() {
     setProfile(p => ({ ...p, coins: p.coins + addCoins }));
     setShowRewardBoxes(false);
     setShowFullShop(false);
-  };
-
-  const handleWatchAdForReward = (reward: string | number) => {
-    const rewardName = typeof reward === 'string' ? reward : `coins_${reward}`;
-    showRewardedAd(rewardName, () => {
-      handleClaimRewardCoins(reward);
-    });
   };
 
   const [victoryStats, setVictoryStats] = useState({
@@ -232,10 +204,8 @@ export default function App() {
   // Handle in-game consumable usage for active game mode
   const handleUseConsumable = useCallback(
     (item: ConsumableItem): boolean => {
-      // Trigger Google Rewarded Ad for Consumable
-      showRewardedAd(`consumable_${item.id}`, () => {
-        console.log('Reward granted for', item.name);
-      });
+      // Logic to trigger ad here
+      console.log('Triggering ad for', item.name);
       return true;
     },
     []
@@ -299,9 +269,6 @@ export default function App() {
   // Level Complete & Chapter Bounty Check
   const handleLevelComplete = (lvl: number, elapsedSeconds: number) => {
     playVictoryFanfare(settings.soundEnabled, settings.sfxVolume);
-
-    // Trigger Google Interstitial Ad on Level Completion
-    showInterstitialAd('level_complete');
 
     const coinsEarned =
       selectedDifficulty === 'expert'
@@ -429,11 +396,10 @@ export default function App() {
 
   // Hint powerup in game
   const handleUseHint = () => {
-    // Trigger Google Rewarded Ad for Hint
-    showRewardedAd('hint', () => {
-      setCurrentLevelHintsUsed(c => c + 1);
-      playHintSparkle(settings.soundEnabled, settings.sfxVolume);
-    });
+    // Logic to trigger ad for hint here
+    console.log('Triggering ad for hint');
+    setCurrentLevelHintsUsed(c => c + 1);
+    playHintSparkle(settings.soundEnabled, settings.sfxVolume);
   };
 
   // Active mission to show in HomeView
@@ -486,7 +452,7 @@ export default function App() {
     <div className="relative w-full min-h-screen bg-slate-900 flex justify-center items-center overflow-hidden font-sans">
       {/* Mobile-proportioned App Viewport */}
       <div
-        className="relative w-full max-w-[430px] h-[100dvh] max-h-[920px] shadow-2xl flex flex-col justify-between overflow-hidden bg-cover bg-center transition-all duration-500 pb-[60px]"
+        className="relative w-full max-w-[430px] h-[100dvh] max-h-[920px] shadow-2xl flex flex-col justify-between overflow-hidden bg-cover bg-center transition-all duration-500"
         style={{
           backgroundImage: currentTab === 'shop' ? 'none' : `url(${activeNatureBg.image})`
         }}
@@ -648,13 +614,13 @@ export default function App() {
       <RewardBoxesModal
         isOpen={showRewardBoxes}
         onClose={() => setShowRewardBoxes(false)}
-        onClaimCoins={handleWatchAdForReward}
+        onClaimCoins={handleClaimRewardCoins}
       />
 
       <FullShopModal
         isOpen={showFullShop}
         onClose={() => setShowFullShop(false)}
-        onWatchAd={handleWatchAdForReward}
+        onWatchAd={handleClaimRewardCoins}
         onClaimWithCoins={handleClaimRewardCoins}
       />
 

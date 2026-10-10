@@ -64,7 +64,7 @@ export const FullShopModal: React.FC<FullShopModalProps> = ({ isOpen, onClose, o
           <h2 className="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3">
             <ShoppingBag className="text-amber-400" /> Loja Grátis
           </h2>
-          <button onClick={onClose} className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white"><X size={24}/></button>
+          <button onClick={onClose} className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"><X size={24}/></button>
         </div>
         
         <div className="overflow-y-auto space-y-4 pr-1">
@@ -84,11 +84,11 @@ export const FullShopModal: React.FC<FullShopModalProps> = ({ isOpen, onClose, o
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 shrink-0">
-                  <button onClick={() => onWatchAd(item.name)} className="bg-amber-600 hover:bg-amber-500 px-4 py-2 rounded-xl text-xs font-black text-white flex items-center gap-1.5 active:scale-95 transition-all">
+                  <button onClick={() => onWatchAd(item.name)} className="bg-amber-600 hover:bg-amber-500 px-4 py-2 rounded-xl text-xs font-black text-white flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
                     <Play size={14} /> AD
                   </button>
                   {item.coinsCost > 0 && (
-                    <button onClick={() => onClaimWithCoins(item.name)} className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-xs font-black text-white flex items-center gap-1.5 active:scale-95 transition-all">
+                    <button onClick={() => onClaimWithCoins(item.name)} className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-xl text-xs font-black text-white flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
                       <Coins size={14} /> {item.coinsCost}
                     </button>
                   )}

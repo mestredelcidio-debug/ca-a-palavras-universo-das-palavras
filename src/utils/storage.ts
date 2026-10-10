@@ -1,10 +1,10 @@
 import { GameSettings, UserProfile } from '../types/game';
 
-const STORAGE_KEY_PROFILE = 'caca_palavras_profile_v1';
+const STORAGE_KEY_PROFILE = 'caca_palavras_profile_v2';
 const STORAGE_KEY_SETTINGS = 'caca_palavras_settings_v1';
 
 export const DEFAULT_PROFILE: UserProfile = {
-  coins: 200, // Starting bonus for hints & fun
+  coins: 0, // Starting with 0 coins for fresh app build
   stars: 0,
   currentLevel: 1,
   completedLevels: {},

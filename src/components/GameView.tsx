@@ -38,8 +38,7 @@ import { GameModeDefinition, ConsumableItem } from '../data/gameModes';
 import { IN_GAME_POWERUPS, InGamePowerup } from '../data/inGamePowerups';
 import { TropicalPartyParticles, TropicalParticle } from './TropicalPartyParticles';
 import { playWordFoundChime, playHintSparkle, playLetterTick } from '../utils/audio';
-
-import { showRewardedAd, showInterstitialAd } from '../utils/ads';
+import { MatchFooterAd } from './MatchFooterAd';
 
 interface GameViewProps {
   levelNumber: number;
@@ -580,69 +579,63 @@ export const GameView: React.FC<GameViewProps> = ({
     if (!activeMode) return;
     const item = activeMode.consumableItem;
 
-    // Trigger Google Rewarded Ad
-    showRewardedAd(`mode_consumable_${activeMode.id}`, () => {
-      // Reward logic after ad is viewed
-      playHintSparkle(soundEnabled, 0.8);
-      confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
+    playHintSparkle(soundEnabled, 0.8);
+    confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
 
-      switch (activeMode.id) {
-        case 1:
-          setAbyssPercent(prev => Math.max(0, prev - 35));
-          setTimeRemaining(prev => prev + 15);
-          setDefeatModalOpen(false);
-          break;
-        case 2:
-          setRevealedFirstLetters(true);
-          break;
-        case 3:
-          setGlassesActive(true);
-          setTimeout(() => setGlassesActive(false), 30000);
-          break;
-        case 5:
-          setBombDisarmed(true);
-          setDefeatModalOpen(false);
-          break;
-        case 6:
-          setVowelsRevealed(true);
-          break;
-        case 7:
-          setTimeRemaining(prev => prev + 15);
-          setDefeatModalOpen(false);
-          break;
-        case 9:
-          setDictionaryActive(true);
-          onUseHint();
-          break;
-        case 10:
-          setLives(3);
-          setDefeatModalOpen(false);
-          break;
-        case 12:
-          setIsStabilized(true);
-          setTimeout(() => setIsStabilized(false), 20000);
-          break;
-        case 14:
-          setFlashlightBoosted(true);
-          break;
-        case 15:
-          setTimeRemaining(prev => prev + 30);
-          setDefeatModalOpen(false);
-          break;
-        default:
-          onUseHint();
-      }
-    });
+    switch (activeMode.id) {
+      case 1:
+        setAbyssPercent(prev => Math.max(0, prev - 35));
+        setTimeRemaining(prev => prev + 15);
+        setDefeatModalOpen(false);
+        break;
+      case 2:
+        setRevealedFirstLetters(true);
+        break;
+      case 3:
+        setGlassesActive(true);
+        setTimeout(() => setGlassesActive(false), 30000);
+        break;
+      case 5:
+        setBombDisarmed(true);
+        setDefeatModalOpen(false);
+        break;
+      case 6:
+        setVowelsRevealed(true);
+        break;
+      case 7:
+        setTimeRemaining(prev => prev + 15);
+        setDefeatModalOpen(false);
+        break;
+      case 9:
+        setDictionaryActive(true);
+        onUseHint();
+        break;
+      case 10:
+        setLives(3);
+        setDefeatModalOpen(false);
+        break;
+      case 12:
+        setIsStabilized(true);
+        setTimeout(() => setIsStabilized(false), 20000);
+        break;
+      case 14:
+        setFlashlightBoosted(true);
+        break;
+      case 15:
+        setTimeRemaining(prev => prev + 30);
+        setDefeatModalOpen(false);
+        break;
+      default:
+        onUseHint();
+    }
   };
 
-  // Use an In-Game Facility Powerup (Watch ad instead of spending coins)
+  // Use an In-Game Facility Powerup
   const handleUseFacilityPowerup = (powerup: InGamePowerup) => {
-    // Trigger Google Rewarded Ad
-    showRewardedAd(`facility_${powerup.id}`, () => {
-      playHintSparkle(soundEnabled, 0.85);
+    playHintSparkle(soundEnabled, 0.85);
 
-      // Apply facility effect
-      switch (powerup.id) {
+    // Apply facility effect
+    switch (powerup.id) {
         case 'varinha_magica': {
           // Automatically finds and solves 1 uncompleted word!
           const uncompleted = puzzle.words.find(w => !foundWords.has(w.cleanDisplay));
@@ -695,7 +688,6 @@ export const GameView: React.FC<GameViewProps> = ({
           break;
         }
       }
-    });
   };
 
   const selectedCellsSet = new Set(selectedPath.map(p => `${p.row},${p.col}`));
@@ -710,7 +702,7 @@ export const GameView: React.FC<GameViewProps> = ({
 
   return (
     <div
-      className={`relative w-full h-full min-h-screen flex flex-col justify-between overflow-hidden select-none pb-6 sm:pb-8 transition-colors ${
+      className={`relative w-full h-full flex flex-col justify-between overflow-x-hidden select-none pb-0 transition-colors ${
         isDamageFlashing ? 'bg-red-950/80' : ''
       }`}
     >
@@ -1075,26 +1067,26 @@ export const GameView: React.FC<GameViewProps> = ({
       {/* ========================================================================= */}
       {/* 5. ARSENAL DE FACILIDADES & ITENS DE COMPRA (R$ 2,50 a R$ 4,90) */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-[370px] mx-auto px-2 z-30 flex flex-col gap-1.5 mt-auto mb-4 sm:mb-6">
+      <div className="w-full max-w-[370px] mx-auto px-2 z-30 flex flex-col gap-1 mt-1 mb-1 shrink-0">
         {/* Status Pills */}
-        <div className="flex items-center justify-between text-[10px] text-white/90 font-bold px-1">
+        <div className="flex items-center justify-between text-[9.5px] text-white/90 font-bold px-1">
           <span className="uppercase tracking-wider text-amber-300">
-            Facilidades em Jogo:
+            ⚡ Facilidades em Jogo:
           </span>
           {shieldActive && (
-            <span className="px-2 py-0.5 rounded-full bg-emerald-500/80 text-white font-mono text-[9px] font-black">
+            <span className="px-2 py-0.5 rounded-full bg-emerald-500/80 text-white font-mono text-[8.5px] font-black">
               🛡️ Escudo Ativo
             </span>
           )}
           {rayXActive && (
-            <span className="px-2 py-0.5 rounded-full bg-amber-500/80 text-slate-950 font-mono text-[9px] font-black animate-pulse">
-              ☀️ Raio-X Ativo (Iniciais)
+            <span className="px-2 py-0.5 rounded-full bg-amber-500/80 text-slate-950 font-mono text-[8.5px] font-black animate-pulse">
+              ☀️ Raio-X Ativo
             </span>
           )}
         </div>
 
         {/* Toolbar of 6 In-Game Facility Powerups (R$ 2,50 a R$ 4,90) */}
-        <div className="w-full p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/20 shadow-xl flex items-center justify-between gap-1">
+        <div className="w-full p-1 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/20 shadow-xl flex items-center justify-between gap-1">
           {IN_GAME_POWERUPS.map(item => {
             const canAfford = coins >= item.coinsCost;
 
@@ -1109,18 +1101,18 @@ export const GameView: React.FC<GameViewProps> = ({
                 }`}
                 title={`${item.name} (${item.priceBRL} ou ${item.coinsCost} moedas): ${item.description}`}
               >
-                {item.id === 'varinha_magica' && <Wand2 className="w-4 h-4" />}
-                {item.id === 'radar_letras' && <Search className="w-4 h-4" />}
-                {item.id === 'congelador_tempo' && <Snowflake className="w-4 h-4" />}
-                {item.id === 'visao_raiox' && <Sun className="w-4 h-4" />}
-                {item.id === 'escudo_protecao' && <Shield className="w-4 h-4" />}
-                {item.id === 'bussola_direcao' && <Compass className="w-4 h-4" />}
+                {item.id === 'varinha_magica' && <Wand2 className="w-3.5 h-3.5" />}
+                {item.id === 'radar_letras' && <Search className="w-3.5 h-3.5" />}
+                {item.id === 'congelador_tempo' && <Snowflake className="w-3.5 h-3.5" />}
+                {item.id === 'visao_raiox' && <Sun className="w-3.5 h-3.5" />}
+                {item.id === 'escudo_protecao' && <Shield className="w-3.5 h-3.5" />}
+                {item.id === 'bussola_direcao' && <Compass className="w-3.5 h-3.5" />}
 
-                <span className="text-[8px] font-display font-black uppercase truncate max-w-[50px] leading-none">
+                <span className="text-[7.5px] font-display font-black uppercase truncate max-w-[48px] leading-none">
                   {item.shortName}
                 </span>
 
-                <span className="text-[7.5px] font-mono font-bold text-amber-200 leading-none">
+                <span className="text-[7px] font-mono font-bold text-amber-200 leading-none">
                   🎁 Grátis
                 </span>
               </button>
@@ -1128,6 +1120,9 @@ export const GameView: React.FC<GameViewProps> = ({
           })}
         </div>
       </div>
+
+      {/* 6. BANNER DE ANÚNCIO NO RODAPÉ DA PARTIDA */}
+      <MatchFooterAd />
 
       {/* DEFEAT / EMERGENCY MONETIZATION MODAL */}
       {defeatModalOpen && activeMode && (
@@ -1154,11 +1149,6 @@ export const GameView: React.FC<GameViewProps> = ({
               <p className="text-[10px] text-white/70">
                 {activeMode.consumableItem.description}
               </p>
-              <div className="flex items-center justify-between pt-1 border-t border-white/10 mt-1">
-                <span className="text-xs font-mono font-black text-emerald-300">
-                  🎁 Assista ao vídeo para resgatar
-                </span>
-              </div>
             </div>
 
             <div className="w-full flex flex-col gap-2">
@@ -1166,7 +1156,6 @@ export const GameView: React.FC<GameViewProps> = ({
                 onClick={handleUseModeConsumable}
                 className="w-full h-11 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-display font-black text-xs uppercase tracking-wide flex items-center justify-center gap-1 shadow-lg active:scale-95 transition-transform cursor-pointer"
               >
-                <Play className="w-4 h-4 fill-white" />
                 <span>Salvar & Continuar Fase</span>
               </button>
 

@@ -36,18 +36,7 @@ export const IN_GAME_POWERUPS: InGamePowerup[] = [
     gradient: 'from-amber-400 to-yellow-500',
     accentColor: '#eab308'
   },
-  {
-    id: 'congelador_tempo',
-    name: 'Distorção Temporal Cósmica (+60s)',
-    shortName: 'Distorção',
-    iconName: 'Snowflake',
-    priceBRL: 'Anúncio',
-    coinsCost: 35,
-    description: 'Dobra o tecido do espaço-tempo adicionando +60 segundos de respiro ao cronômetro.',
-    benefit: '+60 segundos de respiro cósmico',
-    gradient: 'from-sky-400 to-blue-600',
-    accentColor: '#0284c7'
-  },
+
   {
     id: 'visao_raiox',
     name: 'Clarão de Supernova (Raio-X)',
